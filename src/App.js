@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import { Menu, Home } from "./Components";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./Style/style.css";
 
 const App = () => {
   return (
-    <div>Hello</div>
-  )
-}
+    <>
+      <Router>
+          <Menu />
+        <Routes>
+        </Routes>
+      </Router>
+    </>
+  );
+};
 
-export default App
+export default App;
