@@ -1,0 +1,36 @@
+.slick-arrow.slick-prev
+ {
+    z-index: 999;
+    left: 1rem;
+}
+
+.slick-arrow.slick-next {
+    z-index: 999; 
+    right: 4rem;
+}
+
+
+.slick-prev:before , .slick-next:before{
+    font-size: 4rem;
+    color: #000;
+    opacity: 0.4;
+}
+
+.slick-dots {
+    bottom: 15px;
+}
+
+.slick-dots li button:before {
+    font-size: 1rem;
+}
+
+.slick-dots li {
+    margin-left: 20px;
+}
+
+.main {
+    z-index: -1;
+}
+
+
+  
