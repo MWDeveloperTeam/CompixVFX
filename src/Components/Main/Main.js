@@ -1,11 +1,12 @@
 import React from "react";
-import {Menu , ImageSlider} from '../index'
+import {Menu , ImageSlider, Courses} from '../index'
 
 const Main = () => {
   return (
     <>
       <Menu />
       <ImageSlider/>
+      <Courses/>
     </>
   );
 };

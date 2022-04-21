@@ -1,28 +1,36 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState,  } from "react";
 import styled from "styled-components";
-import logo from "../../Media/logo.png";
+// import logo from "../../Media/logo.png";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Constant } from "../../constant/index";
 import SideMenu from "../SideMenu/SideMenu";
+import axios from "axios";
 
 
 const Menu = () => {
   const [toggle, setToggle] = useState(false);
+  const [logo, setLogo] = useState()
+  const [menuText, setMenuText] = useState([])
 
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const response = await axios.get('https://compix-api.herokuapp.com/home')
+        setLogo(response.data[0].logo)
+        setMenuText(response.data[0].menu)
+      } catch (error) {
+        
+      }
+    }
 
-  const items = [
-    "home",
-    "courses",
-    "about",
-    "placements",
-    "gallery",
-    "contact",
-  ];
-
+    getItems()
+  },[])
+  
   const toggleHandler = () => {
     setToggle(!toggle);
   };
+  
   return (
     <MenuSection>
       <div className="sideBar_container">
@@ -33,7 +41,7 @@ const Menu = () => {
       </div>
       <div className="menu_container">
         <ul>
-          {items.map((curItem, index) => (
+          {menuText.map((curItem, index) => (
             <li key={index}>
               <Link to="">{curItem}</Link>
             </li>
@@ -44,7 +52,7 @@ const Menu = () => {
         <Link to="">Login</Link>
         <Link to="">Verify Student</Link>
       </div>
-      {toggle ? <SideMenu  listItems={items} /> : null}
+      {toggle ? <SideMenu  listItems={menuText} /> : null}
     </MenuSection>
   );
 };
