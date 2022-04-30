@@ -1,12 +1,14 @@
 import React from "react";
-import {Menu , ImageSlider, Courses} from '../index'
+import { Menu, ImageSlider, Courses, About, Placements} from "../index";
 
 const Main = () => {
   return (
     <>
       <Menu />
-      <ImageSlider/>
-      <Courses/>
+      <ImageSlider />
+      <Courses />
+      <About />
+      <Placements/>
     </>
   );
 };
