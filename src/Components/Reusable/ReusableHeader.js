@@ -2,13 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { Constant } from '../../constant'
 
-const ReusableHeader = ({hColor ,pColor }) => {
+const ReusableHeader = ({hColor ,pColor, hText, pText }) => {
   return (
     <Section>
-        <h1 style={{color: hColor}}>PLACEMENTS</h1>
+        <h1 style={{color: hColor}}>{hText}</h1>
         <p style={{color: pColor}}>
-          We provide placements in start-ups as well as MNC's After every course
-          we provide internship to get hands-on experience in the real world.
+          {pText}
         </p>
       </Section>
   )
@@ -40,5 +39,51 @@ h1 {
       width: 60%;
       line-height: 2.2rem;
       margin-top: 2rem;
+    }
+
+    @media only screen and (max-width: 1024px) {
+      h1 {
+        font-size: 5rem;
+
+        ::before {
+          content: "";
+          width: 0.6rem;
+          height: 5rem;
+        }
+      }
+      p {
+        font-size: 1.4rem;
+        width: 60%;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 5rem;
+
+        ::before {
+          content: "";
+          width: 0.6rem;
+          height: 5rem;
+          left: 4rem;
+        }
+      }
+      p {
+        font-size: 1.4rem;
+        width: 100%;
+        line-height: 2.3rem;
+      }
+    }
+
+    @media only screen and (max-width: 580px) {
+      h1 {
+        font-size: 4rem;
+        ::before {
+          left: 3rem;
+        }
+      }
+      p {
+        font-size: 1.6rem;
+      }
     }
 `

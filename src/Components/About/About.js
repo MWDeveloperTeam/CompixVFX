@@ -7,7 +7,6 @@ import { isDisabled } from "@testing-library/user-event/dist/utils";
 const About = () => {
   const aboutApi = UseAxios("https://compix-api.herokuapp.com/about", []);
 
-  console.log(aboutApi);
   return (
     <Section>
       <div className="about_heading_container">

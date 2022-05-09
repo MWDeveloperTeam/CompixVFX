@@ -12,7 +12,12 @@ const Placements = () => {
   );
   return (
     <Section>
-      <ReusableHeader hColor={Constant.Colors.seconderyColor} pColor={"#222"} />
+      <ReusableHeader
+        hColor={Constant.Colors.seconderyColor}
+        pColor={"#222"}
+        hText="PLACEMENTS"
+        pText="We provide placements in start-ups as well as MNC's After every course we provide internship to get hands-on experience in the real world."
+      />
       <div className="card_container">
         {placementsApi?.map((elem) => (
           <div className="card" key={elem.id}>
@@ -24,9 +29,16 @@ const Placements = () => {
               <p>{elem.location}</p>
             </div>
             <div className="media_container">
-              <BsFacebook /> 
-              <BsInstagram/>
-              <BsLinkedin/>
+              <span>
+                <BsFacebook />
+              </span>
+
+              <span>
+                <BsInstagram />
+              </span>
+              <span>
+                <BsLinkedin />
+              </span>
             </div>
           </div>
         ))}

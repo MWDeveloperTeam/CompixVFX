@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, ImageSlider, Courses, About, Placements} from "../index";
+import { Menu, ImageSlider, Courses, About, Placements, ImageGallery, SuccessReport} from "../index";
 
 const Main = () => {
   return (
@@ -9,6 +9,8 @@ const Main = () => {
       <Courses />
       <About />
       <Placements/>
+      <ImageGallery/>
+      <SuccessReport/>
     </>
   );
 };
