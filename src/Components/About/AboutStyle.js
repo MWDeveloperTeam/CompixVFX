@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Constant } from "../../constant/index";
 
 export const Section = styled.section`
+clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
   height: auto;
   padding: 7rem 10rem;
   background-color: ${Constant.Colors.primaryColorLight};

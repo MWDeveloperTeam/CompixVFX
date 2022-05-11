@@ -38,6 +38,7 @@ const ImageGallery = () => {
 export default ImageGallery;
 
 const Section = styled.section`
+clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
 font-family: ${Constant.Fonts.primaryFont};
   height: auto;
   padding: 7rem 10rem;

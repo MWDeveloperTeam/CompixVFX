@@ -1,0 +1,17 @@
+.testimonial_container .slick-arrow.slick-prev {
+  left: 1rem;
+}
+
+.testimonial_container .slick-dots {
+    bottom: 0rem;
+  }
+
+@media only screen and (max-width: 768px) {
+  .testimonial_container .slick-dots {
+    bottom: -2.5rem;
+  }
+
+  .testimonial_container .slick-dots li button:before {
+    color: #fff;
+}
+}
