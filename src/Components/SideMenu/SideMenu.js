@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import { Menu } from "./SideMenuStyle";
 import { BsFacebook, BsYoutube, BsTwitter, BsInstagram } from "react-icons/bs";
 
-const SideMenu = ({ listItems, toggle}) => { 
+const SideMenu = ({ listItems, toggle, hideMenu}) => { 
   return (
     <Menu translate={!toggle ? "-100%" : "0%"}>
       <div className="main_container">
         <ul>
           {listItems.map((elem, index) => (
             <li key={index}>
-              <Link to="">{elem}</Link>
+              <Link to={elem} smooth={true} duration={1300} onClick={hideMenu}>{elem}</Link>
             </li>
           ))}
         </ul>

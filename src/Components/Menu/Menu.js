@@ -29,12 +29,15 @@ const Menu = () => {
 
   const toggleHandler = () => {
     setToggle(!toggle);
+
   };
+
+  const hideMenu = () => setToggle(false)
 
   return (
     <MenuSection>
       <div className="sideBar_container">
-        <HiOutlineMenuAlt2 onClick={toggleHandler} />
+        <HiOutlineMenuAlt2 onClick={toggleHandler} style={toggle && {transform: "rotateZ(180deg)", color: Constant.Colors.seconderyColor}}/>
       </div>
       <div className="logo_container">
         <img src={logo} alt="logo" />
@@ -52,7 +55,7 @@ const Menu = () => {
         <Link to="">Login</Link>
         <Link to="">Verify Student</Link>
       </div>
-      <SideMenu listItems={menuText} toggle={toggle} />
+      <SideMenu listItems={menuText} toggle={toggle} hideMenu={hideMenu}/>
     </MenuSection>
   );
 };
@@ -80,6 +83,7 @@ const MenuSection = styled.section`
       color: #fff;
       font-size: 2.5rem;
       cursor: pointer;
+      transition: ease-in-out .3s;
     }
   }
 

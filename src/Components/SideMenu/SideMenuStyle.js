@@ -39,6 +39,11 @@ export const Menu = styled.section`
           font-size: 1.7rem;
           letter-spacing: 0.2rem;
           text-transform: capitalize;
+          cursor: pointer;
+          transition: ease-in-out .3s;
+          &:hover {
+            color: ${Constant.Colors.seconderyColor};
+          }
         }
       }
     }
