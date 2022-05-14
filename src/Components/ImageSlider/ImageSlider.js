@@ -12,7 +12,7 @@ const ImageSlider = () => {
   const imagesApi = UseAxios("https://compix-api.herokuapp.com/home", []);
   const sliderRef = useRef(null)
   return (
-    <div className="image_slider_container">
+    <div className="image_slider_container" id="home">
       <Slider dots infinite autoplay autoplaySpeed={2000} ref={sliderRef}>
         {imagesApi[0]?.imglinks?.map((img) => (
           <div className="img_container" key={img._id}>

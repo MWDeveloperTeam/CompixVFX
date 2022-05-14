@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 // import logo from "../../Media/logo.png";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Constant } from "../../constant/index";
 import SideMenu from "../SideMenu/SideMenu";
@@ -42,7 +43,7 @@ const Menu = () => {
         <ul>
           {menuText.map((curItem, index) => (
             <li key={index}>
-              <Link to="">{curItem}</Link>
+              <Link to={curItem} smooth={true} duration={1300}>{curItem}</Link>
             </li>
           ))}
         </ul>
@@ -102,6 +103,7 @@ const MenuSection = styled.section`
           color: #fff;
           padding: 1rem 1rem;
           border-radius: 50rem;
+          cursor: pointer;
           /* transition: ease-in-out 0.3s; */
           position: relative;
           :hover {

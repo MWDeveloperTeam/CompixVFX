@@ -7,7 +7,7 @@ const About = () => {
   const aboutApi = UseAxios("https://compix-api.herokuapp.com/about", []);
 
   return (
-    <Section>
+    <Section id="about">
       <ReusableHeader
         pText="COMPIX trains students in industry relevent, employment-oriented
           skills through most advanced tools and technologies with the help of

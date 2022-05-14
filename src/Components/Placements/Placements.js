@@ -11,7 +11,7 @@ const Placements = () => {
     []
   );
   return (
-    <Section>
+    <Section id="placements">
       <ReusableHeader
         hColor={Constant.Colors.seconderyColor}
         pColor={"#222"}

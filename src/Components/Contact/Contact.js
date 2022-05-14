@@ -8,7 +8,7 @@ import { Colors } from "../../constant/Colors";
 
 const Contact = () => {
   return (
-    <Section>
+    <Section id="contact">
       <ReusableHeader
         hText="Contact Us"
         pText="We are always available, feel free to contact us."

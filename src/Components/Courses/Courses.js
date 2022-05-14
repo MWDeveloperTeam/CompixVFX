@@ -57,7 +57,7 @@ const Courses = () => {
     ],
   };
   return (
-    <Course>
+    <Course id="courses">
       <div className="content_container">
         <ReusableHeader
           hText="What's Best For You"

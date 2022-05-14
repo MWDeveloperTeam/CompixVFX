@@ -19,7 +19,7 @@ const ImageGallery = () => {
   });
   
   return (
-    <Section>
+    <Section id="gallery">
       <ReusableHeader
         hText="Gallery"
         pText={
