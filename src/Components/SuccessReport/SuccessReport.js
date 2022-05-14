@@ -26,7 +26,7 @@ const SuccessReport = () => {
       />
       <div className="counter_container">
         {SuccessApi?.map((elem, i) => (
-          <div className={`success_card_container ${elem.title} `}>
+          <div key={i} className={`success_card_container ${elem.title} `}>
             <div className="number">
               <i className={elem.icon}></i><CountUp end={elem.num} duration={2} />
             </div>
@@ -113,7 +113,7 @@ const Section = styled.section`
   }
 
   @media only screen and (max-width: 768px){
-    padding: 3rem;
+    padding: 2rem;
   }
 
   @media only screen and (max-width: 500px){

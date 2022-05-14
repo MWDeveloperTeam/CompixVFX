@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState,  } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 // import logo from "../../Media/logo.png";
 import { Link } from "react-router-dom";
@@ -7,30 +7,29 @@ import { Constant } from "../../constant/index";
 import SideMenu from "../SideMenu/SideMenu";
 import axios from "axios";
 
-
 const Menu = () => {
   const [toggle, setToggle] = useState(false);
-  const [logo, setLogo] = useState()
-  const [menuText, setMenuText] = useState([])
+  const [logo, setLogo] = useState();
+  const [menuText, setMenuText] = useState([]);
 
   useEffect(() => {
     const getItems = async () => {
       try {
-        const response = await axios.get('https://compix-api.herokuapp.com/home')
-        setLogo(response.data[0].logo)
-        setMenuText(response.data[0].menu)
-      } catch (error) {
-        
-      }
-    }
+        const response = await axios.get(
+          "https://compix-api.herokuapp.com/home"
+        );
+        setLogo(response.data[0].logo);
+        setMenuText(response.data[0].menu);
+      } catch (error) {}
+    };
 
-    getItems()
-  },[])
-  
+    getItems();
+  }, []);
+
   const toggleHandler = () => {
     setToggle(!toggle);
   };
-  
+
   return (
     <MenuSection>
       <div className="sideBar_container">
@@ -52,7 +51,7 @@ const Menu = () => {
         <Link to="">Login</Link>
         <Link to="">Verify Student</Link>
       </div>
-      {toggle ? <SideMenu  listItems={menuText} /> : null}
+      <SideMenu listItems={menuText} toggle={toggle} />
     </MenuSection>
   );
 };
@@ -60,14 +59,18 @@ const Menu = () => {
 export default Menu;
 
 const MenuSection = styled.section`
+  width: 100%;
   height: 7rem;
   background-color: ${Constant.Colors.mainColor};
-  opacity: 0.87;
+  /* opacity: 0.87; */
   display: flex;
   align-items: center;
   justify-content: space-around;
   font-size: 1.4rem;
   font-family: ${Constant.Fonts.primaryFont};
+  position: fixed;
+  top: 0;
+  z-index: 9622656564;
 
   /* sideBar Style */
   .sideBar_container {

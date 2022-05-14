@@ -4,12 +4,14 @@ import { Constant } from "../../constant";
 export const Menu = styled.section`
   width: 85%;
   height: calc(100% - 6rem);
-  /* background-color: red; */
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 6rem;
   display: flex;
   transition: ease-in-out 0.3s;
+  z-index: 9999999999;
+  transform: translate(${(props) => props.translate});
+  transition: ease-in-out .3s;
   
   .main_container {
     width: 100%;
@@ -18,14 +20,12 @@ export const Menu = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* border-radius: 0 1.2rem 1.2rem 0; */
 
     > ul {
       list-style: none;
       display: flex;
       flex-direction: column;
       padding: 3rem 5rem;
-      /* flex: 1; */
       li {
         border-bottom: 0.1rem solid #333;
         width: 100%;

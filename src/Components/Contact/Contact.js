@@ -181,7 +181,7 @@ const Section = styled.section`
 
 
   @media only screen and (max-width:768px) {
-    padding: 3rem;
+    padding: 2rem;
   .contact_container {
     flex-direction: column;
     gap: 5rem;

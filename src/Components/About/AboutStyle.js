@@ -1,20 +1,25 @@
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
+import backImg from '../../Media/p1.jpg'
 
 export const Section = styled.section`
-clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
+/* clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%); */
   height: auto;
   padding: 7rem 10rem;
   background-color: ${Constant.Colors.primaryColorLight};
+  background-image: url(${backImg});
+  background-blend-mode: saturation;
   /* opacity: 0.6; */
   font-family: ${Constant.Fonts.primaryFont};
   .about_heading_container {
+
     h1 {
       font-size: 5rem;
       color: #fff;
       margin-left: 2rem;
       display: flex;
       align-items: center;
+
 
       ::before {
         content: "";
@@ -105,7 +110,6 @@ clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
     .content_container {
       display: flex;
       .content {
-        /* background-color: red; */
         padding: 2rem 0;
 
         h1 {
@@ -139,7 +143,7 @@ clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
   }
 
   @media only screen and (max-width: 768px) {
-    padding: 4rem;
+    padding: 2rem;
     .about_heading_container {
       h1 {
         font-size: 5rem;
@@ -191,14 +195,13 @@ clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
       width: 100%;
       figure {
         img {
-          width: inherit;
+          width: 28rem;
         }
       }
     }
   }
 
   @media only screen and (max-width: 580px){
-    padding: 3rem;
     .about_heading_container {
       h1 {
         font-size: 4rem;
@@ -230,11 +233,13 @@ clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
       }
     }
 
+  }
+
+  @media only screen and (max-width: 425px){
     .img_container {
       figure {
         img {
-          /* width: inherit; */
-          max-width: 350px;
+          max-width: 20rem;
         }
       }
     }

@@ -109,10 +109,10 @@ export const Section = styled.section`
   }
 
   @media only screen and (max-width: 768px) {
-    padding: 3rem;
+    padding: 2rem;
     gap: 5rem;
     .card_container {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 3rem;
 
       .card {
@@ -121,6 +121,13 @@ export const Section = styled.section`
         img {
         }
       }
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .card_container {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 3rem;
     }
   }
 `;

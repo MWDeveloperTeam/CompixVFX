@@ -28,7 +28,7 @@ const Section = styled.section`
   background-color: ${Constant.Colors.primaryColor};
   p {
     font-size: 1.6rem;
-    color: #e4e4e4;
+    color: #f4f2f7;
   }
 
   .footer_icons {
@@ -37,12 +37,32 @@ const Section = styled.section`
       
       svg {
           font-size: 2rem;
-          color: #fff;
+          color: #f4f2f7;
           transition: ease-in-out .3s;
 
           &:hover {
               color: ${Constant.Colors.seconderyColor};
           }
       }
+  }
+
+  @media only screen and (max-width: 768px){
+  padding: 3rem;
+  display: flex;
+  p {
+    font-size: 1.3rem;
+  }
+
+  .footer_icons {
+      svg {
+          font-size: 1.6rem;
+      }
+  }     
+  }
+
+  @media only screen and (max-width: 430px){
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;     
   }
 `;

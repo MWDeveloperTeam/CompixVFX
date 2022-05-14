@@ -1,10 +1,20 @@
-.testimonial_container .slick-arrow.slick-prev {
-  left: 1rem;
+.testimonial_container .slick-next,
+.testimonial_container .slick-prev {
+  background-color: transparent;
+  pointer-events: none;
 }
 
+/* .testimonial_container .slick-arrow.slick-prev {
+  left: 1rem;
+} */
+
 .testimonial_container .slick-dots {
-    bottom: 0rem;
-  }
+  bottom: 0rem;
+}
+
+.testimonial_container .slick-prev:before , .testimonial_container .slick-next:before{
+  display: none;
+}
 
 @media only screen and (max-width: 768px) {
   .testimonial_container .slick-dots {
@@ -13,5 +23,5 @@
 
   .testimonial_container .slick-dots li button:before {
     color: #fff;
-}
+  }
 }

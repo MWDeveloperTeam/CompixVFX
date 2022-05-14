@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Constant } from "../../constant";
 
 const SliderCard = ({ username, qualification, Image, comment, name }) => {
-  console.log(name);
   return (
     <Card>
       <div className="img_container">

@@ -2,21 +2,18 @@ import React from "react";
 import { Section } from "./AboutStyle";
 import { IoArrowRedoCircle } from "react-icons/io5";
 import UseAxios from "../CustomHooks/UseAxios";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-
+import ReusableHeader from "../Reusable/ReusableHeader";
 const About = () => {
   const aboutApi = UseAxios("https://compix-api.herokuapp.com/about", []);
 
   return (
     <Section>
-      <div className="about_heading_container">
-        <h1>Who we are</h1>
-        <p>
-          COMPIX trains students in industry relevent, employment-oriented
+      <ReusableHeader
+        pText="COMPIX trains students in industry relevent, employment-oriented
           skills through most advanced tools and technologies with the help of
-          expert faculty.
-        </p>
-      </div>
+          expert faculty."
+          hText="Who we are"
+      />
       <div className="content_container">
         <div className="content">
           <h1>We Are Expert In</h1>
@@ -39,9 +36,9 @@ const About = () => {
           </ul>
         </div>
         <div className="img_container">
-            <figure>
-                <img src="https://compix.in/images/about.png" alt="Image" />
-            </figure>
+          <figure>
+            <img src="https://compix.in/images/about.png" alt="Image" />
+          </figure>
         </div>
       </div>
     </Section>

@@ -1,39 +1,23 @@
-.image_slider_container {
-    width: 100%;
-    height: 50rem;
-    position: relative;
-}
-
-.img_container {
-width: 100%;
-height: 50rem;
-position: relative;
-}
-
-.img_container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
 .slick-arrow.slick-prev
  {
     left: 1rem;
     z-index: 1;
+    background-color: transparent;
+    pointer-events: none;
 }
 
-.slick-arrow.slick-next {
+.card_container .slick-arrow.slick-next {
     right: 4rem;
     z-index: 1;
+    background-color: transparent;
+    pointer-events: none;
 }
 
-.slick-prev:before , .slick-next:before{
-    font-size: 4rem;
-    color: #ff0000;
-    opacity: 0.7;
-    /* display: none; */
+.card_container .slick-prev:before , .card_container .slick-next:before{
+    display: none;
 }
+
+/* Slick Dots Style */
 
 .slick-dots {
     bottom: 15px;

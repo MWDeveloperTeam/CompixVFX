@@ -2,45 +2,26 @@ import styled from "styled-components";
 import { Constant } from "../../constant";
 
 export const Course = styled.section`
-  padding: 5rem 10rem;
+  padding: 7rem 10rem;
   font-family: ${Constant.Fonts.primaryFont};
 
   .content_container {
     display: flex;
+    justify-content: space-between;
+    height: 12rem;
 
-    .courses_title_container {
-      width: 80%;
+    .button_container {
+      height: 100%;
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      h1 {
-        font-size: 5rem;
-        color: ${Constant.Colors.seconderyColor};
-        margin-left: 2rem;
-        display: flex;
-        align-items: center;
-
-        ::before {
-          content: "";
-          width: 0.6rem;
-          height: 5rem;
-          background-color: ${Constant.Colors.seconderyColorLight};
-          position: absolute;
-          left: 10rem;
-        }
-      }
-
-      p {
-        font-size: 1.6rem;
-        line-height: 2.5rem;
-        color: #444;
-      }
+      align-items: flex-end;
     }
 
-    .courses_slider_arrows_container {
-      /* background-color: red;
-      padding: 1rem; */
-    }
+  }
+
+  .botton_course_slider_handle {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
   }
 
   @media only screen and (max-width: 995px) {
@@ -48,24 +29,14 @@ export const Course = styled.section`
       .courses_title_container {
         h1 {
           font-size: 4rem;
-
-          ::before {
-          }
-        }
-
-        p {
         }
       }
 
-      .courses_slider_arrows_container {
-        /* background-color: red;
-        padding: 1rem; */
-      }
     }
   }
 
   @media only screen and (max-width: 768px) {
-    padding: 5rem 2rem;
+    padding: 2rem;
 
     .content_container {
       .courses_title_container {
@@ -82,16 +53,10 @@ export const Course = styled.section`
 
         }
       }
-
-      .courses_slider_arrows_container {
-        background-color: olive;
-        display: none;
-      }
     }
   }
 
   @media only screen and (max-width: 570px) {
-    padding: 5rem 2rem;
     .content_container {
       .courses_title_container {
         gap: 3rem;
@@ -107,10 +72,6 @@ export const Course = styled.section`
         }
       }
 
-      .courses_slider_arrows_container {
-        background-color: olive;
-        display: none;
-      }
     }
   }
 `;

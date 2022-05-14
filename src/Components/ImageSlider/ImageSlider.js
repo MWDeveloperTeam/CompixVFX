@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import UseAxios from "../CustomHooks/UseAxios";
 import styled from "styled-components";
 import Slider from "react-slick";
 import { Constant } from "../../constant";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./styles.css";
+import "./style.css";
+import { LeftButton } from "./Buttons";
 
 const ImageSlider = () => {
   const imagesApi = UseAxios("https://compix-api.herokuapp.com/home", []);
-
+  const sliderRef = useRef(null)
   return (
     <div className="image_slider_container">
-      <Slider dots infinite autoplay autoplaySpeed={2000} >
+      <Slider dots infinite autoplay autoplaySpeed={2000} ref={sliderRef}>
         {imagesApi[0]?.imglinks?.map((img) => (
           <div className="img_container" key={img._id}>
             <img src={img.text} alt="Slide Images" />
@@ -32,6 +33,7 @@ const ImageSlider = () => {
           </ul>
           <button>Start Now</button>
         </div>
+        <LeftButton sliderFunc={sliderRef}/>
       </HeroText>
     </div>
   );
@@ -154,6 +156,27 @@ const HeroText = styled.div`
 
       ul {
         font-size: 1.45rem;
+      }
+
+      button {
+        margin-top: 0.5rem;
+        padding: 0.8rem 2rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    .content_container {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      ul {
+        font-size: 1.2rem;
       }
 
       button {

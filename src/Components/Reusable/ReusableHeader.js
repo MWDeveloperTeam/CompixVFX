@@ -59,13 +59,13 @@ h1 {
 
     @media only screen and (max-width: 768px) {
     h1 {
-        font-size: 5rem;
+        font-size: 3rem;
 
         ::before {
           content: "";
           width: 0.6rem;
           height: 5rem;
-          left: 4rem;
+          left: 3rem;
         }
       }
       p {
@@ -77,8 +77,9 @@ h1 {
 
     @media only screen and (max-width: 580px) {
       h1 {
-        font-size: 4rem;
+        font-size: 2.5rem;
         ::before {
+          height: 3.5rem;
           left: 3rem;
         }
       }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
 import UseAxios from "../CustomHooks/UseAxios";
@@ -8,12 +8,24 @@ import SliderCard from "./SliderCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
+import { Button } from "./TestimonialButtons";
+import backImg from '../../Media/p1.jpg'
 
 const Testimonial = () => {
+  const [sliderHandle, setSliderHandle] = useState(window.screen.width);
   const TestimonialApi = UseAxios(
     "https://compix-api.herokuapp.com/testmonial",
     []
   );
+
+  useEffect(() => {
+    const sliderfunc = () => {
+      setSliderHandle(window.innerWidth);
+    };
+    window.addEventListener("resize", sliderfunc);
+  }, []);
+
+  const testSliderRef = useRef(null);
 
   const SliderSetting = {
     dots: true,
@@ -23,6 +35,9 @@ const Testimonial = () => {
     pauseOnHover: true,
     centerMode: true,
     centerPadding: "50px",
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    ref: testSliderRef,
     responsive: [
       {
         breakpoint: 768,
@@ -35,14 +50,22 @@ const Testimonial = () => {
   };
   return (
     <Section>
-      <ReusableHeader
-        hText="Testimonial"
-        pText="People say we are the best in the market. And we are always looking forward to maintain this decorem of ours."
-      />
+      <div className="header_main">
+        <ReusableHeader
+          hText="Testimonial"
+          pText="People say we are the best in the market. And we are always looking forward to maintain this decorem of ours."
+        />
+        <div className="slider_main">
+          <div className="button_container">
+            {sliderHandle > 768 && <Button testSliderProp={testSliderRef} />}
+          </div>
+        </div>
+      </div>
       <div className="testimonial_container">
         <Slider className="testimonial_slider" {...SliderSetting}>
           {TestimonialApi?.map((elem) => (
             <SliderCard
+              key={elem._id}
               username={elem.username}
               qualification={elem.qualification}
               Image={elem.Image}
@@ -51,6 +74,9 @@ const Testimonial = () => {
             />
           ))}
         </Slider>
+      </div>
+      <div className="footer_test_button">
+        {sliderHandle < 768 && <Button testSliderProp={testSliderRef} />}
       </div>
     </Section>
   );
@@ -62,16 +88,32 @@ const Section = styled.section`
   font-family: ${Constant.Fonts.primaryFont};
   padding: 7rem 10rem;
   background-color: ${Constant.Colors.primaryColor};
+  background-image: url(${backImg});
+  background-blend-mode: saturation;
+
+  .header_main {
+    .slider_main {
+      position: relative;
+      .button_container {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
 
   .testimonial_container {
     margin-top: 3rem;
   }
 
-  @media only screen and (max-width: 768px) {
-    font-family: ${Constant.Fonts.primaryFont};
-    padding: 3rem;
-    background-color: ${Constant.Colors.primaryColor};
+  .footer_test_button {
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+  }
 
+  @media only screen and (max-width: 768px) {
+    padding: 2rem;
     .testimonial_container {
       margin-top: 3rem;
     }

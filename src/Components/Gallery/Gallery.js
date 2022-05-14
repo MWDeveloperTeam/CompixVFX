@@ -4,6 +4,7 @@ import UseAxios from "../CustomHooks/UseAxios";
 import { Constant } from "../../constant";
 import Gallery from "react-grid-gallery";
 import ReusableHeader from "../Reusable/ReusableHeader";
+import backImg from '../../Media/p1.jpg'
 
 const ImageGallery = () => {
   const GalleryApi = UseAxios("https://compix-api.herokuapp.com/gallery", []);
@@ -12,12 +13,11 @@ const ImageGallery = () => {
     return {
       src: elem.galleryimage,
       thumbnail: elem.galleryimage,
-    //   thumbnailWidth: Math.floor(Math.random() * (300, 250) + 250),
-    //   thumbnailWidth: 800,
-    //   thumbnailHeight: 512,
+      thumbnailWidth: Math.floor(Math.random() * (300, 250) + 250),
+      thumbnailHeight: 212,
     };
   });
-
+  
   return (
     <Section>
       <ReusableHeader
@@ -29,7 +29,7 @@ const ImageGallery = () => {
         pColor="#fff"
       />
       <div className="gallery_container">
-        <Gallery images={finalImagesGallery} margin={4} showImageCount={false}/>
+        <Gallery images={finalImagesGallery} margin={4} showImageCount={false} lightboxWidth={730}/>
       </div>
     </Section>
   );
@@ -38,21 +38,20 @@ const ImageGallery = () => {
 export default ImageGallery;
 
 const Section = styled.section`
-clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
 font-family: ${Constant.Fonts.primaryFont};
   height: auto;
   padding: 7rem 10rem;
-  /* overflow: auto; */
   background-color: ${Constant.Colors.primaryColor};
+  background-image: url(${backImg});
+  background-blend-mode: saturation;
 
   .gallery_container {
     padding-top: 3rem;
     padding-right: 0;
     overflow: hidden;
-    /* background-color: red; */
   }
 
   @media only screen and (max-width: 768px) {
-  padding: 3rem;
+  padding: 2rem;
   }
 `;

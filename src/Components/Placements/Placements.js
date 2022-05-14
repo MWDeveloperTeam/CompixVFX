@@ -15,12 +15,12 @@ const Placements = () => {
       <ReusableHeader
         hColor={Constant.Colors.seconderyColor}
         pColor={"#222"}
-        hText="PLACEMENTS"
+        hText="Placements"
         pText="We provide placements in start-ups as well as MNC's After every course we provide internship to get hands-on experience in the real world."
       />
       <div className="card_container">
         {placementsApi?.map((elem) => (
-          <div className="card" key={elem.id}>
+          <div className="card" key={elem._id}>
             <div className="img_container">
               <img src={elem.image} alt="image" />
             </div>
