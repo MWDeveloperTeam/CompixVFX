@@ -1,13 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Section } from "./AboutStyle";
 import { IoArrowRedoCircle } from "react-icons/io5";
 import UseAxios from "../CustomHooks/UseAxios";
 import ReusableHeader from "../Reusable/ReusableHeader";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const About = () => {
   const aboutApi = UseAxios("https://compix-api.herokuapp.com/about", []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+  
   return (
-    <Section id="about">
+    <Section id="about" data-aos='fade-up'>
       <ReusableHeader
         pText="COMPIX trains students in industry relevent, employment-oriented
           skills through most advanced tools and technologies with the help of

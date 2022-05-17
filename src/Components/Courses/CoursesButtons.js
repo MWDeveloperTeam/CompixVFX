@@ -27,4 +27,10 @@ const Buttons = styled.section`
         background-color: ${Constant.Colors.seconderyColorLight}; 
     }
   }
+
+  @media only screen and (max-width: 768px){
+  svg {
+    font-size: 3rem;
+  }
+  }
 `;

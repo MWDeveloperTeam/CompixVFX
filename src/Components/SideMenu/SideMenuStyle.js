@@ -12,6 +12,8 @@ export const Menu = styled.section`
   z-index: 9999999999;
   transform: translate(${(props) => props.translate});
   transition: ease-in-out .3s;
+  overflow-y: scroll;
+  background-color: #000;
   
   .main_container {
     width: 100%;

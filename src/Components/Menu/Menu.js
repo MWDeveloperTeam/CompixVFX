@@ -1,61 +1,103 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import logo from "../../Media/logo.png";
-// import { Link } from "react-router-dom";
-import { Link } from "react-scroll";
+import { Link as Links } from "react-scroll";
+import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Constant } from "../../constant/index";
 import SideMenu from "../SideMenu/SideMenu";
 import axios from "axios";
+import Login from "../Login/Login";
 
 const Menu = () => {
+  const [dialogToggle, setDialogToggle] = useState(false)
   const [toggle, setToggle] = useState(false);
   const [logo, setLogo] = useState();
   const [menuText, setMenuText] = useState([]);
+  const [classAdd, setClassAdd] = useState("home");
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  const dialogToggleFunc = () => setDialogToggle(!dialogToggle)
 
   useEffect(() => {
     const getItems = async () => {
       try {
         const response = await axios.get(
-          "https://compix-api.herokuapp.com/home"
+          "https://compix-api.herokuapp.com/home",
+          {}
         );
-        setLogo(response.data[0].logo);
-        setMenuText(response.data[0].menu);
-      } catch (error) {}
+
+        if (response.status === 200) {
+          setLogo(response.data[0].logo);
+          setMenuText(response.data[0].menu);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
+
+    const sliderfunc = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", sliderfunc);
 
     getItems();
   }, []);
 
   const toggleHandler = () => {
     setToggle(!toggle);
-
   };
 
-  const hideMenu = () => setToggle(false)
-
+  const hideMenu = () => setToggle(false);
   return (
     <MenuSection>
-      <div className="sideBar_container">
-        <HiOutlineMenuAlt2 onClick={toggleHandler} style={toggle && {transform: "rotateZ(180deg)", color: Constant.Colors.seconderyColor}}/>
+      <div className={`sideBar_container ${classAdd}`}>
+        <HiOutlineMenuAlt2
+          onClick={toggleHandler}
+          style={
+            toggle && {
+              transform: "rotateZ(180deg)",
+              color: Constant.Colors.seconderyColor,
+            }
+          }
+        />
       </div>
       <div className="logo_container">
-        <img src={logo} alt="logo" />
+        <Link to='/'>
+          <img src={logo} alt="logo" />
+        </Link>
       </div>
       <div className="menu_container">
         <ul>
-          {menuText.map((curItem, index) => (
-            <li key={index}>
-              <Link to={curItem} smooth={true} duration={1300}>{curItem}</Link>
-            </li>
-          ))}
+          {!menuText
+            ? "loading"
+            : menuText.map((curItem, index) => (
+                <li name={curItem} key={index}>
+                  <Links
+                    to={curItem}
+                    href={`#${curItem}`}
+                    smooth={true}
+                    duration={1300}
+                    name={curItem}
+                    onClick={(e) => {
+                      setClassAdd(e.target.name);
+                    }}
+                    className={curItem === classAdd && "active"}
+                  >
+                    {curItem}
+                  </Links>
+                </li>
+              ))}
         </ul>
       </div>
       <div className="login_container">
-        <Link to="">Login</Link>
+        <Link to="" onClick={dialogToggleFunc}>Login</Link>
         <Link to="">Verify Student</Link>
       </div>
-      <SideMenu listItems={menuText} toggle={toggle} hideMenu={hideMenu}/>
+      {windowWidth < 768 ? (
+        <SideMenu listItems={menuText} toggle={toggle} hideMenu={hideMenu} />
+      ) : null}
+      <Login dialogToggle={dialogToggle} dialogToggleFunc={dialogToggleFunc}/>
     </MenuSection>
   );
 };
@@ -83,7 +125,7 @@ const MenuSection = styled.section`
       color: #fff;
       font-size: 2.5rem;
       cursor: pointer;
-      transition: ease-in-out .3s;
+      transition: ease-in-out 0.3s;
     }
   }
 
@@ -103,12 +145,12 @@ const MenuSection = styled.section`
       li {
         text-transform: uppercase;
         letter-spacing: 0.1rem;
+
         a {
           color: #fff;
           padding: 1rem 1rem;
           border-radius: 50rem;
           cursor: pointer;
-          /* transition: ease-in-out 0.3s; */
           position: relative;
           :hover {
             color: #000;
@@ -129,6 +171,18 @@ const MenuSection = styled.section`
           :hover::before {
             width: 100%;
           }
+        }
+        .scroll {
+          color: #fff;
+        }
+
+        .active {
+          background: linear-gradient(
+            90deg,
+            rgba(204, 163, 0, 1) 0%,
+            rgba(230, 131, 0, 1) 100%
+          );
+          border-radius: 0;
         }
       }
     }

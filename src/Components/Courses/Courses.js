@@ -9,24 +9,21 @@ import { Course } from "./Style";
 import ReusableHeader from "../Reusable/ReusableHeader";
 import { Constant } from "../../constant";
 import { Button } from "./CoursesButtons";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Courses = () => {
   const [sliderHandle, setSliderHandle] = useState(window.screen.width);
   const coursesApi = UseAxios("https://compix-api.herokuapp.com/courses", []);
 
-  useEffect(() => {
-    const sliderfunc = () => {
-      setSliderHandle(window.innerWidth);
-    };
-    window.addEventListener("resize", sliderfunc)
-  }, []);
+ 
 
   const coursesSliderRef = useRef(null);
 
   const SliderSetting = {
     centerPadding: "300px",
     slidesToShow: 4,
-    infinite: false,
+    infinite: true,
     ref: coursesSliderRef,
     responsive: [
       {
@@ -56,8 +53,16 @@ const Courses = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    AOS.init({duration: 2000});
+    const sliderfunc = () => {
+      setSliderHandle(window.innerWidth);
+    };
+    window.addEventListener("resize", sliderfunc);
+  }, []);
   return (
-    <Course id="courses">
+    <Course id="courses" data-aos='fade-up'>
       <div className="content_container">
         <ReusableHeader
           hText="What's Best For You"

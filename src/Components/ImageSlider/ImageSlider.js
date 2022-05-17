@@ -6,11 +6,15 @@ import { Constant } from "../../constant";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
+import { Link as ScrollLink } from "react-scroll";
 import { LeftButton } from "./Buttons";
+// import AOS from 'aos';
+// import 'aos/dist/aos.css'
+// AOS.init();
 
 const ImageSlider = () => {
   const imagesApi = UseAxios("https://compix-api.herokuapp.com/home", []);
-  const sliderRef = useRef(null)
+  const sliderRef = useRef(null);
   return (
     <div className="image_slider_container" id="home">
       <Slider dots infinite autoplay autoplaySpeed={2000} ref={sliderRef}>
@@ -31,9 +35,13 @@ const ImageSlider = () => {
               <li key={i}>{course}</li>
             ))}
           </ul>
-          <button>Start Now</button>
+          <button>
+            <ScrollLink to="courses" smooth={true} duration={1300}>
+              Start Now
+            </ScrollLink>
+          </button>
         </div>
-        <LeftButton sliderFunc={sliderRef}/>
+        <LeftButton sliderFunc={sliderRef} />
       </HeroText>
     </div>
   );
@@ -106,19 +114,29 @@ const HeroText = styled.div`
       margin-top: 1.5rem;
       pointer-events: initial;
       font-size: 2rem;
-      padding: 1rem 2.5rem;
+      /* padding: 1rem 2.5rem; */
       border: none;
       border-radius: 100rem;
-      background-color: ${Constant.Colors.primaryColor};
+      background-color: transparent;
       /* background-color: red; */
       opacity: 1;
       color: #fff;
       cursor: pointer;
-      transition: ease-in-out 0.3s;
-      :hover {
+      
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: ${Constant.Colors.primaryColor};
+        padding: 1rem 2.5rem;
+        border-radius: 100rem;
+        transition: ease-in-out 0.3s;
+        &:hover {
         background-color: #fff;
         color: #000;
       }
+      }
+      
     }
   }
 
@@ -186,22 +204,3 @@ const HeroText = styled.div`
     }
   }
 `;
-
-// const imagesApi = [
-//   {
-//     image:
-//       "https://www.teahub.io/photos/full/14-149650_purple-flowers-wallpapers-pink-and-purple-flower-aesthetic.jpg",
-//   },
-
-//   { image: "https://wallpaperaccess.com/full/327035.jpg" },
-
-//   {
-//     image:
-//       "https://www.teahub.io/photos/full/79-794909_beautiful-purple-flowers-wallpaper-pretty-purple-flowers-backgrounds.jpg",
-//   },
-
-//   {
-//     image:
-//       "https://previews.123rf.com/images/navintar/navintar1702/navintar170200083/72450299-nat%C3%BCrliche-blume-hintergrund-erstaunlich-blick-in-die-natur-von-lila-blumen-im-garten-in-der-mitte-d.jpg",
-//   },
-// ];

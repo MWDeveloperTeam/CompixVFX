@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import UseAxios from "../CustomHooks/UseAxios";
 import { Constant } from "../../constant";
@@ -14,12 +14,13 @@ const ImageGallery = () => {
       src: elem.galleryimage,
       thumbnail: elem.galleryimage,
       thumbnailWidth: Math.floor(Math.random() * (300, 250) + 250),
+      // thumbnailWidth: 312,
       thumbnailHeight: 212,
     };
   });
   
   return (
-    <Section id="gallery">
+    <Section id="gallery" >
       <ReusableHeader
         hText="Gallery"
         pText={
@@ -44,6 +45,7 @@ font-family: ${Constant.Fonts.primaryFont};
   background-color: ${Constant.Colors.primaryColor};
   background-image: url(${backImg});
   background-blend-mode: saturation;
+  
 
   .gallery_container {
     padding-top: 3rem;

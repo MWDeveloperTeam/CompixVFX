@@ -10,6 +10,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 import { Button } from "./TestimonialButtons";
 import backImg from '../../Media/p1.jpg'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Testimonial = () => {
   const [sliderHandle, setSliderHandle] = useState(window.screen.width);
@@ -19,6 +21,7 @@ const Testimonial = () => {
   );
 
   useEffect(() => {
+    AOS.init({duration: 1500});
     const sliderfunc = () => {
       setSliderHandle(window.innerWidth);
     };
@@ -49,7 +52,7 @@ const Testimonial = () => {
     ],
   };
   return (
-    <Section>
+    <Section data-aos='fade-down'>
       <div className="header_main">
         <ReusableHeader
           hText="Testimonial"
