@@ -7,6 +7,7 @@ import Top from "./Components/GoToTop/Top";
 import Loader from "./Components/Loader/Loader";
 import Home from './StudentDashboard/Home'
 import AdminIndex from "./AdminDashboard/AdminIndex";
+import ViewStudents from "./AdminDashboard/students/ViewStudents";
 
 const Menu = lazy(() => import("./Components/Menu/Menu"));
 const Helper = lazy(() => import("./Components/Helper/Helper"));
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Home />} />
             <Route path="/admin" element={<AdminIndex />} />
+            <Route path="/students" element={<ViewStudents/>}/>
           </Routes>
         </Suspense>
       </Router>
