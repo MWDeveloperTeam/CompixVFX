@@ -1,10 +1,12 @@
-import React, { Suspense, lazy, useState, useEffect } from "react";
+import React, { Suspense, lazy, } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Demo from "./Components/Demo";
 import Main from "./Components/Main/Main";
 import "./Style/style.css";
 import Top from "./Components/GoToTop/Top";
 import Loader from "./Components/Loader/Loader";
+import Home from './StudentDashboard/Home'
+import AdminIndex from "./AdminDashboard/AdminIndex";
 
 const Menu = lazy(() => import("./Components/Menu/Menu"));
 const Helper = lazy(() => import("./Components/Helper/Helper"));
@@ -25,21 +27,24 @@ const App = () => {
     <>
       <Router>
         <Suspense fallback={<Loader />}>
-          <Menu />
-          <Helper />
-          <ImageSlider />
-          <Courses />
-          <About />
-          <Placements />
-          <ImageGallery />
-          <SuccessReport />
-          <Testimonial />
-          <Contact />
-          <Top />
-          <Footer />
-          {/* <Routes>
+            {/* <Menu />
+            <Helper />
+            <ImageSlider />
+            <Courses />
+            <About />
+            <Placements />
+            <ImageGallery />
+            <SuccessReport />
+            <Testimonial />
+            <Contact />
+            <Top />
+            <Footer /> */}
+
+          <Routes>
             <Route path="/" element={<Main />} />
-          </Routes> */}
+            <Route path="/login" element={<Home />} />
+            <Route path="/admin" element={<AdminIndex />} />
+          </Routes>
         </Suspense>
       </Router>
     </>

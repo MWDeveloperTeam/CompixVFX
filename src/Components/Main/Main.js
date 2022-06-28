@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, ImageSlider, Courses, About, Placements, ImageGallery, SuccessReport, Testimonial, Contact, Footer, Helper} from "../index";
+import { Menu, ImageSlider, Courses, About, Placements, ImageGallery, SuccessReport, Testimonial, Contact, Footer, Helper, Top} from "../index";
 
 const Main = () => {
   return (
@@ -14,6 +14,7 @@ const Main = () => {
       <SuccessReport/>
       <Testimonial/>
       <Contact/>
+      <Top/>
       <Footer/>
     </>
   );

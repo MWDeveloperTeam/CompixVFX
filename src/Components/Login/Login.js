@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -7,72 +7,109 @@ import { MdChevronLeft } from "react-icons/md";
 import styled from "styled-components";
 import { Constant } from "../../constant";
 import ForgotPassword from "./ForgotPassword";
+import Otp from "./Otp";
+import UpdatePassword from "./UpdatePassword";
+import LoginPage from "./LoginPage";
 
 const Login = ({ dialogToggle, dialogToggleFunc }) => {
+  const [loginPage, setLoginPage] = useState(true);
   const [forgotPassword, setForgotPassword] = useState(false);
-  const labelStyle = {
-    fontSize: 16,
-    backgroundColor: "#fff",
+  const [emailVerify, setEmailVerify] = useState(false);
+  const [updataPassword, setUpdataPassword] = useState(false);
+  const [backId, setBackId] = useState("");
+
+  const showForgotDialog = () => {
+    setLoginPage(false);
+    setForgotPassword(true);
+    setBackId('forgot_id')
   };
+
+  const showOptDialog = () => {
+    setForgotPassword(false);
+    setEmailVerify(true);
+    setBackId('otp_id')
+  };
+
+  const showUpdateDialog = () => {
+    setEmailVerify(false);
+    setUpdataPassword(true);
+    setBackId('update_id')
+  };
+
+  const showLoginDialog = () => {
+    setUpdataPassword(false);
+    setLoginPage(true);
+    setBackId('');
+  }
+
+  const DialogComponent = () => {
+    if (loginPage) {
+      return <LoginPage showForgotDialog={showForgotDialog} />;
+    } else if (forgotPassword) {
+      return <ForgotPassword showOptDialog={showOptDialog} />;
+    } else if (emailVerify) {
+      return <Otp showUpdateDialog={showUpdateDialog} />;
+    } else if (updataPassword) {
+      return <UpdatePassword showLoginDialog={showLoginDialog} />;
+    }
+  };
+
+  const closeButtonAction = () => {
+    dialogToggleFunc();
+    setTimeout(() => {
+      setLoginPage(true);
+      setForgotPassword(false);
+      setEmailVerify(false);
+      setUpdataPassword(false);
+    }, 200);
+  };
+
+  const DialogBackHandler = (e) => {
+    if (e.target.id === "forgot_id") {
+      setLoginPage(true);
+      setForgotPassword(false);
+      setBackId('')
+    }else if (e.target.id === 'otp_id'){
+      setEmailVerify(false);
+      setForgotPassword(true);
+      setBackId('forgot_id')
+    }else if(e.target.id === 'update_id') {
+      setEmailVerify(true);
+      setUpdataPassword(false)
+      setBackId('otp_id')
+    }
+  };
+
   return (
     <Dialog open={dialogToggle} style={{ zIndex: "96226565656565" }} fullWidth>
       <LoginCard>
         <form action="">
-          <div className={forgotPassword ? 'closeDialog' : 'forgotDialog'} >
-            {!forgotPassword ? (
+          {/* Dialog Header */}
+          <div
+            className={
+              forgotPassword || emailVerify || updataPassword
+                ? "closeDialog"
+                : "forgotDialog"
+            }
+          >
+            {loginPage ? (
               <RiCloseFill
                 onClick={() => {
                   dialogToggleFunc();
-                  setForgotPassword(false);
+                  closeButtonAction();
                 }}
               />
             ) : (
               <>
-                <MdChevronLeft onClick={() => {
-                    setForgotPassword(false);
-                  }}/>
-                <RiCloseFill
-                  onClick={() => {
-                    dialogToggleFunc();
-                    setForgotPassword(false);
-                  }}
-                />
+                <MdChevronLeft onClick={(e) => DialogBackHandler(e)} id={backId} />
+                <RiCloseFill onClick={closeButtonAction} />
               </>
             )}
           </div>
-          {!forgotPassword ? (
-            <>
-              <div className="login_header">
-                <h1>Login</h1>
-              </div>
-              <div className="inputs_container">
-                <div className="userEmail">
-                  <TextField
-                    label="Enter email"
-                    fullWidth
-                    InputLabelProps={{ style: { ...labelStyle } }}
-                    required
-                  />
-                </div>
-                <div className="password">
-                  <TextField
-                    label="Enter password"
-                    fullWidth
-                    type="password"
-                    InputLabelProps={{ style: { ...labelStyle } }}
-                  />
-                </div>
-                <div className="login">
-                  <Button variant="contained" className="button">
-                    Login
-                  </Button>
-                </div>
-                <p onClick={() => setForgotPassword(true)}>Forgot Password</p>
-              </div>
-            </>
-          ) : (
-            <ForgotPassword />
-          )}
+
+          {/* Dialog Body */}
+
+          {DialogComponent()}
         </form>
       </LoginCard>
     </Dialog>

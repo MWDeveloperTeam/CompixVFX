@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import styled from "styled-components";
 import { Constant } from "../../constant";
 
-const ForgotPassword = ({showOptDialog}) => {
+const Otp = ({showUpdateDialog}) => {
   const labelStyle = {
     fontSize: 16,
     backgroundColor: "#fff",
@@ -12,20 +12,20 @@ const ForgotPassword = ({showOptDialog}) => {
   return (
     <ForgotCard>
       <div className="login_header">
-        <h1>Forgot Password</h1>
+        <h1>Enter OTP</h1>
       </div>
       <div className="inputs_container">
         <div className="userEmail">
           <TextField
-            label="Enter email"
+            label="Enter OTP"
             fullWidth
             InputLabelProps={{ style: { ...labelStyle } }}
             required
           />
         </div>
         <div className="login">
-          <Button variant="contained" className="button" onClick={() => showOptDialog()}>
-            Verify
+          <Button variant="contained" className="button" onClick={() => showUpdateDialog()}>
+            Submit
           </Button>
         </div>
       </div>
@@ -33,7 +33,7 @@ const ForgotPassword = ({showOptDialog}) => {
   );
 };
 
-export default ForgotPassword;
+export default Otp;
 
 const ForgotCard = styled.div`
 

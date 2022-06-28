@@ -57,6 +57,7 @@ const Contact = () => {
         },
         (error) => {
           Errornotify();
+          setPending(false) 
         }
       )
 
