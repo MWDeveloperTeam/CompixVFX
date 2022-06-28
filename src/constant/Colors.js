@@ -9,7 +9,7 @@ export const Colors = {
 export const AdminColors = {
   primaryColor: "#37A0EA",
   primaryColorDark: "#2786C8",
-  seconderyColor: "#ffffff",
+  seconderyColor: "#FFFFFF",
   seconderyColorLight: "#EFF7FD",
   mainColor: "#F3F6F9",
   boldColor: "#000000",

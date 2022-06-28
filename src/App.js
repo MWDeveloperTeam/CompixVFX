@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useReducer } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Demo from "./Components/Demo";
 import Main from "./Components/Main/Main";
@@ -7,6 +7,8 @@ import Top from "./Components/GoToTop/Top";
 import Loader from "./Components/Loader/Loader";
 import Home from "./StudentDashboard/Home";
 import AdminIndex from "./AdminDashboard/AdminIndex";
+import { Store } from "./StateStore";
+import { reducer,initialState } from "./reducer";
 
 const Menu = lazy(() => import("./Components/Menu/Menu"));
 const Helper = lazy(() => import("./Components/Helper/Helper"));
@@ -23,9 +25,11 @@ const Contact = lazy(() => import("./Components/Contact/Contact"));
 const Footer = lazy(() => import("./Components/Footer/Footer"));
 
 const App = () => {
+  const [state, dispatch] = useReducer(reducer,initialState)
   return (
     <>
       <Router>
+        <Store.Provider value={{state,dispatch}}>
         <Suspense fallback={<Loader />}>
           {/* <Menu />
             <Helper />
@@ -51,6 +55,7 @@ const App = () => {
             </Route>
           </Routes>
         </Suspense>
+        </Store.Provider>
       </Router>
     </>
   );
