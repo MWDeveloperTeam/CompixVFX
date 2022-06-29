@@ -24,7 +24,8 @@ const Body = styled.div`
   height: calc(100vh - 10rem);
   background-color: ${Constant.AdminColors.mainColor};
   position: absolute;
-  padding: 3rem 2rem;
+  padding:0rem 2rem;
   top: 6rem;
   right: 0;
+  overflow: auto;
 `;
