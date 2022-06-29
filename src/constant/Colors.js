@@ -12,6 +12,7 @@ export const AdminColors = {
   seconderyColor: "#FFFFFF",
   seconderyColorLight: "#EFF7FD",
   mainColor: "#F3F6F9",
-  boldColor:"#000000",
-  lightColor:"#545454"
+  boldColor: "#000000",
+  lightColor: "#545454",
 };
+

@@ -27,7 +27,7 @@ const Placements = () => {
         {placementsApi?.map((elem) => (
           <div className="card" key={elem._id}>
             <div className="img_container">
-              <img src={elem.image} alt="image" />
+              <img src={elem.image} alt="company banner" />
             </div>
             <div className="label_container">
               <h2>{elem.title}</h2>

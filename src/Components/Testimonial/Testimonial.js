@@ -38,8 +38,6 @@ const Testimonial = () => {
     pauseOnHover: true,
     centerMode: true,
     centerPadding: "50px",
-    pauseOnHover: true,
-    pauseOnFocus: true,
     ref: testSliderRef,
     responsive: [
       {

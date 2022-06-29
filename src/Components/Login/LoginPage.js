@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 const LoginPage = ({ showForgotDialog }) => {
-  const [loginPage, setLoginPage] = useState("");
   const [userLoginData, setUserLoginData] = useState({
     email: "",
     password: "",
