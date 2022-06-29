@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { ReducerText, AdminRouterText } from "../Utils/HelperText";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { MdDashboard, MdPayments } from "react-icons/md";
@@ -10,11 +11,7 @@ import { Constant } from "../../constant/index";
 import { Store } from "../../StateStore";
 
 const SideMenu = () => {
-  // const [studentDrop, setStudentDrop] = useState(false);
-  // const [attendDrop, setAttendDrop] = useState(false);
-  // const [paymentDrop, setpaymentDrop] = useState(false);
   const { state, dispatch } = useContext(Store);
-  console.log(state);
 
   return (
     <SideBar>
@@ -26,19 +23,22 @@ const SideMenu = () => {
       <div className="nav_container">
         <ul>
           <li>
-            <NavLink to="">
+            <NavLink to={AdminRouterText.Dashboard}>
               <MdDashboard /> Dashboard <BiChevronDown />
             </NavLink>
           </li>
           <li>
             <NavLink
-              to=""
-              // onClick={() => {
-              //   setStudentDrop(!studentDrop);
-              //   setAttendDrop(false);
-              // }}
+              to="#"
               onClick={() => {
-                dispatch({type:"STUDENT", payload: !state})
+                if (state === ReducerText.ReduStudent) {
+                  dispatch({ type: ReducerText.ReduStudent, payload: "" });
+                } else {
+                  dispatch({
+                    type: ReducerText.ReduStudent,
+                    payload: ReducerText.ReduStudent,
+                  });
+                }
               }}
             >
               <FaUsers /> Student <BiChevronDown />
@@ -47,82 +47,92 @@ const SideMenu = () => {
           {/* Student DropDown */}
           <ul
             className="dropDown"
-            // style={
-            //   studentDrop
-            //     ? { height: "50px", overflow: "hidden" }
-            //     : { height: "0", overflow: "hidden" }
-            // }
-            style={state ? { height: "50px", overflow: "hidden" } : { height: "0", overflow: "hidden" }}
+            style={
+              state === ReducerText.ReduStudent
+                ? { height: "50px", overflow: "hidden" }
+                : { height: "0", overflow: "hidden" }
+            }
           >
             <li>
-              <NavLink to="">View Students</NavLink>
+              <NavLink to={AdminRouterText.ViewStudent}>View Students</NavLink>
             </li>
             <li>
-              <NavLink to="">Register Student</NavLink>
+              <NavLink to={AdminRouterText.RegisterStudent}>Register Student</NavLink>
             </li>
           </ul>
 
           <li>
             <NavLink
-              to=""
-              // onClick={() => {
-              //   setAttendDrop(!attendDrop)
-              //   setStudentDrop(false);
-              // }}
+              to="#"
               onClick={() => {
-                dispatch({type:"STUDENT", payload: !state})
+                if (state === ReducerText.ReduAttendence) {
+                  dispatch({ type: ReducerText.ReduAttendence, payload: "" });
+                } else {
+                  dispatch({
+                    type: ReducerText.ReduAttendence,
+                    payload: ReducerText.ReduAttendence,
+                  });
+                }
               }}
             >
               <RiCalendarTodoFill /> Attendence <BiChevronDown />
             </NavLink>
           </li>
+
           {/* Attendence DropDown */}
+
           <ul
             className="dropDown"
-            // style={
-            //   attendDrop
-            //     ? { height: "50px", overflow: "hidden" }
-            //     : { height: "0", overflow: "hidden" }
-            // }
-            style={state ? { height: "50px", overflow: "hidden" } : { height: "0", overflow: "hidden" }}
+            style={
+              state === ReducerText.ReduAttendence
+                ? { height: "50px", overflow: "hidden" }
+                : { height: "0", overflow: "hidden" }
+            }
           >
             <li>
-              <NavLink to="">View Students</NavLink>
+              <NavLink to={AdminRouterText.ViewAttendence}>View Attendence</NavLink>
             </li>
             <li>
-              <NavLink to="">Register Student</NavLink>
+              <NavLink to={AdminRouterText.CreateAttendence}>Create Attendence</NavLink>
             </li>
           </ul>
           <li>
             <NavLink
-              to=""
-              // onClick={() => {
-              //     setStudentDrop(false);
-              //     setAttendDrop(false);
-              //     setpaymentDrop(!paymentDrop)
-              //   }}
+              to="#"
+              onClick={() => {
+                if (state === ReducerText.ReduPayment) {
+                  dispatch({ type: ReducerText.ReduPayment, payload: "" });
+                } else {
+                  dispatch({
+                    type: ReducerText.ReduPayment,
+                    payload: ReducerText.ReduPayment,
+                  });
+                }
+              }}
             >
               <MdPayments /> Payment <BiChevronDown />
             </NavLink>
           </li>
+
           {/* Payment DropDown */}
+
           <ul
             className="dropDown"
-            // style={
-            //   paymentDrop
-            //     ? { height: "50px", overflow: "hidden" }
-            //     : { height: "0", overflow: "hidden" }
-            // }
+            style={
+              state === ReducerText.ReduPayment
+                ? { height: "50px", overflow: "hidden" }
+                : { height: "0", overflow: "hidden" }
+            }
           >
             <li>
-              <NavLink to="">View Students</NavLink>
+              <NavLink to={AdminRouterText.ViewPayment}>View Payment</NavLink>
             </li>
             <li>
-              <NavLink to="">Register Student</NavLink>
+              <NavLink to={AdminRouterText.CreatePayment}>Create Payment</NavLink>
             </li>
           </ul>
           <li>
-            <NavLink to="">
+            <NavLink to={AdminRouterText.ManageWeb}>
               <CgWebsite /> Manage Web <BiChevronDown />
             </NavLink>
           </li>

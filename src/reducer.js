@@ -1,9 +1,12 @@
-export const initialState = false;
+import { ReducerText } from "./AdminDashboard/Utils/HelperText";
+export const initialState = "";
 
 export const reducer = (state, action) => {
-  if (action.type === "STUDENT") {
+  if (action.type === ReducerText.ReduStudent) {
     return action.payload;
-  } else if (action.type === "ATTENDENCE") {
+  } else if (action.type === ReducerText.ReduAttendence) {
+    return action.payload;
+  } else if (action.type === ReducerText.ReduPayment) {
     return action.payload;
   }
 
