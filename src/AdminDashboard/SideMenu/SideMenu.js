@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ReducerText, AdminRouterText } from "../Utils/HelperText";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
@@ -11,10 +11,27 @@ import { Constant } from "../../constant/index";
 import { Store } from "../../StateStore";
 
 const SideMenu = () => {
-  const { state, dispatch } = useContext(Store);
+  const { state, dispatch, sideBarDispatch, sideBarState } = useContext(Store);
+  const [resize, setResize] = useState(window.screen.width);
+
+  const sideBarFunc = () => {
+    setResize(window.innerWidth);
+    if (resize <= 768) {
+      sideBarDispatch({ type: "SIDE_OPEN", payload: true });
+    } else {
+      sideBarDispatch({ type: "SIDE_OPEN", payload: false });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", sideBarFunc);
+    sideBarFunc()
+  }, [resize]);
+
+  console.log(resize, sideBarState);
 
   return (
-    <SideBar>
+    <SideBar translate={!sideBarState ? null : "translateX(-25rem)"}>
       <div className="logo">
         <Link to="/admin">
           <img src="https://compix.in/images/logo.png" />
@@ -57,7 +74,9 @@ const SideMenu = () => {
               <NavLink to={AdminRouterText.ViewStudent}>View Students</NavLink>
             </li>
             <li>
-              <NavLink to={AdminRouterText.RegisterStudent}>Register Student</NavLink>
+              <NavLink to={AdminRouterText.RegisterStudent}>
+                Register Student
+              </NavLink>
             </li>
           </ul>
 
@@ -90,10 +109,14 @@ const SideMenu = () => {
             }
           >
             <li>
-              <NavLink to={AdminRouterText.ViewAttendence}>View Attendence</NavLink>
+              <NavLink to={AdminRouterText.ViewAttendence}>
+                View Attendence
+              </NavLink>
             </li>
             <li>
-              <NavLink to={AdminRouterText.CreateAttendence}>Create Attendence</NavLink>
+              <NavLink to={AdminRouterText.CreateAttendence}>
+                Create Attendence
+              </NavLink>
             </li>
           </ul>
           <li>
@@ -128,7 +151,9 @@ const SideMenu = () => {
               <NavLink to={AdminRouterText.ViewPayment}>View Payment</NavLink>
             </li>
             <li>
-              <NavLink to={AdminRouterText.CreatePayment}>Create Payment</NavLink>
+              <NavLink to={AdminRouterText.CreatePayment}>
+                Create Payment
+              </NavLink>
             </li>
           </ul>
           <li>
@@ -152,6 +177,9 @@ const SideBar = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  transform: ${(props) => props.translate};
+  transition: ease-in-out 0.3s;
+  z-index: 656564;
 
   .logo {
     height: 6rem;

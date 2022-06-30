@@ -1,5 +1,6 @@
 import { ReducerText } from "./AdminDashboard/Utils/HelperText";
 export const initialState = "";
+export const open = false;
 
 export const reducer = (state, action) => {
   if (action.type === ReducerText.ReduStudent) {
@@ -12,3 +13,15 @@ export const reducer = (state, action) => {
 
   return state;
 };
+
+
+export const SidebarReducer = (state, action) => {
+  if(action.type === "SIDE_OPEN") {
+    return action.payload
+  }
+
+  return state
+}
+
+
+

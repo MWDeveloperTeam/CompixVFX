@@ -16,7 +16,7 @@ import Loader from "./Components/Loader/Loader";
 import Home from "./StudentDashboard/Home";
 import AdminIndex from "./AdminDashboard/AdminIndex";
 import { Store } from "./StateStore";
-import { reducer, initialState } from "./reducer";
+import { reducer, initialState, SidebarReducer, open } from "./reducer";
 
 const Menu = lazy(() => import("./Components/Menu/Menu"));
 const Helper = lazy(() => import("./Components/Helper/Helper"));
@@ -34,10 +34,13 @@ const Footer = lazy(() => import("./Components/Footer/Footer"));
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [sideBarState, sideBarDispatch] = useReducer(SidebarReducer, open);
   return (
     <>
       <Router>
-        <Store.Provider value={{ state, dispatch }}>
+        <Store.Provider
+          value={{ state, dispatch, sideBarDispatch, sideBarState }}
+        >
           <Suspense fallback={<Loader />}>
             {/* <Menu />
             <Helper />
