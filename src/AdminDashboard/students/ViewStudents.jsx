@@ -217,9 +217,9 @@ const Section = styled.section`
     }
   }
   .tableContainer {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     overflow: auto;
-    height: 48rem;
+    height: 47rem;
     table {
       font-family: ${Constant.Fonts.primaryFont};
 
