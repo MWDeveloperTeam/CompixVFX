@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import image from "../../Media/p1.jpg";
 import styled from "styled-components";
@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Popover from "@mui/material/Popover";
 import { Constant } from "../../constant/index";
 import { Box } from "@mui/system";
+import { Store } from "../../StateStore";
 
 const useStyles = makeStyles({
   menu: {
@@ -49,6 +50,12 @@ const useStyles = makeStyles({
       fontWeight: "300",
     },
   },
+  userMessageWrapper: {
+    cursor: "pointer",
+    // "&:hover": {
+    //   backgroundColor: 'red'
+    // }
+  },
   userMessage: {
     fontSize: "1.2rem",
     paddingLeft: "4rem",
@@ -66,6 +73,7 @@ const useStyles = makeStyles({
 });
 
 const Header = () => {
+  const { sideBarState, sideBarDispatch } = useContext(Store);
   // Logout
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -95,10 +103,13 @@ const Header = () => {
 
   const classes = useStyles();
   return (
-    <AdminHeader>
-      {console.log(classes)}
+    <AdminHeader width={!sideBarState ? "calc(100% - 25rem)" : "100%"}>
       <div className="menu_container">
-        <HiOutlineMenuAlt2 />
+        <HiOutlineMenuAlt2
+          onClick={() => {
+            sideBarDispatch({ type: "SIDE_OPEN", payload: !sideBarState });
+          }}
+        />
       </div>
 
       <div className="header_ations_container">
@@ -119,7 +130,10 @@ const Header = () => {
             }}
           >
             <Box sx={{ p: 2 }} className={classes.messageMenu}>
-              <div style={{ marginBottom: "1rem" }}>
+              <div
+                style={{ marginBottom: "1rem" }}
+                className={classes.userMessageWrapper}
+              >
                 <div className={classes.icon}>
                   <h3 className="faIcon">
                     <FaUser />
@@ -133,7 +147,10 @@ const Header = () => {
                 </p>
               </div>
 
-              <div style={{ marginBottom: "1rem" }}>
+              <div
+                style={{ marginBottom: "1rem" }}
+                className={classes.userMessageWrapper}
+              >
                 <div className={classes.icon}>
                   <h3 className="faIcon">
                     <FaUser />
@@ -147,7 +164,10 @@ const Header = () => {
                 </p>
               </div>
 
-              <div style={{ marginBottom: "1rem" }}>
+              <div
+                style={{ marginBottom: "1rem" }}
+                className={classes.userMessageWrapper}
+              >
                 <div className={classes.icon}>
                   <h3 className="faIcon">
                     <FaUser />
@@ -213,7 +233,7 @@ export default Header;
 const AdminHeader = styled.div`
   font-family: ${Constant.Fonts.primaryFont};
   padding: 2rem;
-  width: calc(100% - 25rem);
+  width: ${(props) => props.width};
   height: 6rem;
   background-color: ${Constant.AdminColors.seconderyColor};
   position: fixed;
@@ -223,6 +243,7 @@ const AdminHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: width ease-in-out 0.3s;
 
   /* Header Menu Container */
   .menu_container {
@@ -230,6 +251,10 @@ const AdminHeader = styled.div`
       font-size: 2.5rem;
       color: ${Constant.AdminColors.lightColor};
       cursor: pointer;
+      transition: color ease-in-out 0.3s;
+      &:hover {
+        color: ${Constant.AdminColors.primaryColor};
+      }
     }
   }
 
@@ -268,5 +293,9 @@ const AdminHeader = styled.div`
 
   .MuiMenu-paper {
     background-color: red;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
   }
 `;
