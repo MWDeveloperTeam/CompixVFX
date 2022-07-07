@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { Constant } from "../constant/index";
@@ -11,7 +11,7 @@ const AdminIndex = () => {
       <SideMenu />
       <Header />
       <Footer />
-      <Body  width={!sideBarState ? "calc(100% - 25rem)" : "100%"}>
+      <Body width={!sideBarState ? "calc(100% - 25rem)" : "100%"}>
         <Outlet />
       </Body>
     </div>
@@ -26,10 +26,12 @@ const Body = styled.div`
   height: auto;
   background-color: ${Constant.AdminColors.mainColor};
   position: absolute;
+  padding: 1rem 2rem;
   top: 6rem;
   right: 0;
-  transition: width ease-in-out .3s;
+  transition: width ease-in-out 0.3s;
   padding: 1rem 2rem;
+  overflow: auto;
 
   @media only screen and (max-width: 768px) {
     width: 100%;

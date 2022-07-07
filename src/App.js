@@ -7,6 +7,7 @@ import {
   ManageWeb,
   ViewAttendence,
   ViewPayment,
+  RegisterStudent,
 } from "./AdminDashboard/index";
 import { AdminRouterText } from "./AdminDashboard/Utils/HelperText";
 import Main from "./Components/Main/Main";
@@ -16,6 +17,7 @@ import Loader from "./Components/Loader/Loader";
 import Home from "./StudentDashboard/Home";
 import AdminIndex from "./AdminDashboard/AdminIndex";
 import { Store } from "./StateStore";
+import ViewStudents from "./AdminDashboard/students/ViewStudents";
 import { reducer, initialState, SidebarReducer, open } from "./reducer";
 
 const Menu = lazy(() => import("./Components/Menu/Menu"));
@@ -63,6 +65,14 @@ const App = () => {
                 <Route
                   path={AdminRouterText.Dashboard}
                   element={<Dashboard />}
+                />
+                <Route
+                  path={AdminRouterText.ViewStudent}
+                  element={<ViewStudents />}
+                />
+                <Route
+                  path={AdminRouterText.RegisterStudent}
+                  element={<RegisterStudent />}
                 />
                 <Route
                   path={AdminRouterText.ViewAttendence}

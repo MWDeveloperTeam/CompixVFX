@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-scroll";
 import { Menu } from "./SideMenuStyle";
 import { BsFacebook, BsYoutube, BsTwitter, BsInstagram } from "react-icons/bs";
