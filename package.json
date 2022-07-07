@@ -25,6 +25,7 @@
     "react-slick": "^0.28.1",
     "react-toastify": "^9.0.1",
     "react-validation": "^3.0.7",
+    "recharts": "^2.1.12",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
     "validator": "^13.7.0",

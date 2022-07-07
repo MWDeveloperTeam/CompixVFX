@@ -22,7 +22,8 @@ export default AdminIndex;
 
 const Body = styled.div`
   width: ${(props) => props.width};
-  height: calc(100vh - 10rem);
+  min-height: calc(100vh - 10rem);
+  height: auto;
   background-color: ${Constant.AdminColors.mainColor};
   position: absolute;
   top: 6rem;

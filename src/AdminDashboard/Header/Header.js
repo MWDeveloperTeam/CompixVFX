@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import image from "../../Media/p1.jpg";
 import styled from "styled-components";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FaUserCircle, FaUser } from "react-icons/fa";
 import { BiLogInCircle } from "react-icons/bi";
 import { IoIosMail } from "react-icons/io";
@@ -104,13 +103,6 @@ const Header = () => {
   const classes = useStyles();
   return (
     <AdminHeader width={!sideBarState ? "calc(100% - 25rem)" : "100%"}>
-      <div className="menu_container">
-        <HiOutlineMenuAlt2
-          onClick={() => {
-            sideBarDispatch({ type: "SIDE_OPEN", payload: !sideBarState });
-          }}
-        />
-      </div>
 
       <div className="header_ations_container">
         <div className="message">
@@ -241,9 +233,10 @@ const AdminHeader = styled.div`
   box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px,
     rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   transition: width ease-in-out 0.3s;
+  z-index: 1;
 
   /* Header Menu Container */
   .menu_container {

@@ -8,6 +8,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { RiCalendarTodoFill } from "react-icons/ri";
 import { CgWebsite } from "react-icons/cg";
 import { Constant } from "../../constant/index";
+import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { Store } from "../../StateStore";
 
 const SideMenu = () => {
@@ -25,10 +26,16 @@ const SideMenu = () => {
 
   useEffect(() => {
     window.addEventListener("resize", sideBarFunc);
-    sideBarFunc()
+    sideBarFunc();
   }, [resize]);
 
-  console.log(resize, sideBarState);
+  const SideBarClickHandler = () => {
+    if (resize <= 768) {
+      sideBarDispatch({ type: "SIDE_OPEN", payload: true });
+    } else {
+      sideBarDispatch({ type: "SIDE_OPEN", payload: false });
+    }
+  };
 
   return (
     <SideBar translate={!sideBarState ? null : "translateX(-25rem)"}>
@@ -36,11 +43,21 @@ const SideMenu = () => {
         <Link to="/admin">
           <img src="https://compix.in/images/logo.png" />
         </Link>
+        <div className="side_bar_icon">
+          <BsFillArrowRightSquareFill
+            onClick={() => {
+              sideBarDispatch({ type: "SIDE_OPEN", payload: !sideBarState });
+            }}
+          />
+        </div>
       </div>
       <div className="nav_container">
         <ul>
           <li>
-            <NavLink to={AdminRouterText.Dashboard}>
+            <NavLink
+              to={AdminRouterText.Dashboard}
+              onClick={() => SideBarClickHandler()}
+            >
               <MdDashboard /> Dashboard <BiChevronDown />
             </NavLink>
           </li>
@@ -71,7 +88,12 @@ const SideMenu = () => {
             }
           >
             <li>
-              <NavLink to={AdminRouterText.ViewStudent}>View Students</NavLink>
+              <NavLink
+                to={AdminRouterText.ViewStudent}
+                onClick={() => SideBarClickHandler()}
+              >
+                View Students
+              </NavLink>
             </li>
             <li>
               <NavLink to={AdminRouterText.RegisterStudent}>
@@ -109,12 +131,18 @@ const SideMenu = () => {
             }
           >
             <li>
-              <NavLink to={AdminRouterText.ViewAttendence}>
+              <NavLink
+                to={AdminRouterText.ViewAttendence}
+                onClick={() => SideBarClickHandler()}
+              >
                 View Attendence
               </NavLink>
             </li>
             <li>
-              <NavLink to={AdminRouterText.CreateAttendence}>
+              <NavLink
+                to={AdminRouterText.CreateAttendence}
+                onClick={() => SideBarClickHandler()}
+              >
                 Create Attendence
               </NavLink>
             </li>
@@ -148,16 +176,27 @@ const SideMenu = () => {
             }
           >
             <li>
-              <NavLink to={AdminRouterText.ViewPayment}>View Payment</NavLink>
+              <NavLink
+                to={AdminRouterText.ViewPayment}
+                onClick={() => SideBarClickHandler()}
+              >
+                View Payment
+              </NavLink>
             </li>
             <li>
-              <NavLink to={AdminRouterText.CreatePayment}>
+              <NavLink
+                to={AdminRouterText.CreatePayment}
+                onClick={() => SideBarClickHandler()}
+              >
                 Create Payment
               </NavLink>
             </li>
           </ul>
           <li>
-            <NavLink to={AdminRouterText.ManageWeb}>
+            <NavLink
+              to={AdminRouterText.ManageWeb}
+              onClick={() => SideBarClickHandler()}
+            >
               <CgWebsite /> Manage Web <BiChevronDown />
             </NavLink>
           </li>
@@ -179,9 +218,10 @@ const SideBar = styled.div`
   left: 0;
   transform: ${(props) => props.translate};
   transition: ease-in-out 0.3s;
-  z-index: 656564;
+  z-index: 96226565655;
 
   .logo {
+    position: relative;
     height: 6rem;
     display: flex;
     justify-content: center;
@@ -194,6 +234,27 @@ const SideBar = styled.div`
       border-bottom: 0.1rem solid ${Constant.AdminColors.seconderyColor};
       img {
         width: 80%;
+      }
+    }
+
+    .side_bar_icon {
+      width: 3rem;
+      aspect-ratio: 1/1;
+      position: absolute;
+      right: 0;
+      border-radius: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      /* z-index: 96226565656565; */
+
+      svg {
+        font-size: 4rem;
+        transform: translate(.6rem);
+        color: ${Constant.AdminColors.primaryColor};
+        cursor: pointer;
       }
     }
   }
