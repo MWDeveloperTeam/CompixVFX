@@ -25,10 +25,8 @@ const SideMenu = () => {
 
   useEffect(() => {
     window.addEventListener("resize", sideBarFunc);
-    sideBarFunc()
+    sideBarFunc();
   }, [resize]);
-
-  console.log(resize, sideBarState);
 
   return (
     <SideBar translate={!sideBarState ? null : "translateX(-25rem)"}>

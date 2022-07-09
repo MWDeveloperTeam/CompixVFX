@@ -6,6 +6,7 @@ import {
   Select,
   MenuItem,
   TextareaAutosize,
+  Button,
 } from "@mui/material";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 });
 const RegisterStudent = () => {
   const classes = useStyles();
+  const [profilePath, setProfilePath] = useState({});
   const [inputData, setInputData] = useState({
     fname: "",
     lname: "",
@@ -32,6 +34,10 @@ const RegisterStudent = () => {
     course: "",
     gender: "",
     qualification: "",
+    address: "",
+    email: "",
+    password: "",
+    cpassword: "",
   });
 
   const getFormValue = (e) => {
@@ -43,6 +49,21 @@ const RegisterStudent = () => {
   const sendDataToDatabase = (e) => {
     e.preventDefault();
     console.log(inputData);
+    setInputData({
+      fname: "",
+      lname: "",
+      mname: "",
+      parentage: "",
+      phone: "",
+      dob: "",
+      course: "",
+      gender: "",
+      qualification: "",
+      address: "",
+      email: "",
+      password: "",
+      cpassword: "",
+    });
   };
   return (
     <Section>
@@ -85,20 +106,21 @@ const RegisterStudent = () => {
             autoComplete="off"
           />
           <TextField
-            required
-            id="outlined-required"
-            label="Phone"
+            label="Phone number"
+            type="number"
             name="phone"
-            value={inputData.phone}
+            id="outlined-required"
             onChange={getFormValue}
+            value={inputData.phone}
             autoComplete="off"
-            type={"number"}
           />
+
           <TextField
             required
             id="outlined-required"
-            label="Date of birth"
+            // label="Date of birth"
             name="dob"
+            type={"date"}
             value={inputData.dob}
             onChange={getFormValue}
             autoComplete="off"
@@ -145,10 +167,55 @@ const RegisterStudent = () => {
             autoComplete="off"
             minRows={5}
             required
+            name="address"
+            value={inputData.address}
+            onChange={getFormValue}
           />
-          <TextField type={"file"} />
+          <div className="inputFileWrapper">
+            <label htmlFor="inputFile">upload your image here</label>
+            <br />
+            <TextField
+              type="file"
+              id="inputFile"
+              name="profile"
+              value={inputData.profile}
+              onChange={(e) => setProfilePath(e.target.files[0])}
+            />
+          </div>
         </div>
-        <input type="submit" value="submit" onClick={sendDataToDatabase} />
+        <div className="passwordDiv">
+          <TextField
+            required
+            id="outlined-required"
+            name="email"
+            label="User email"
+            value={inputData.email}
+            onChange={getFormValue}
+            autoComplete="off"
+            type={"email"}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            name="password"
+            label="Password"
+            value={inputData.password}
+            onChange={getFormValue}
+            autoComplete="off"
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Confirm Password"
+            name="cpassword"
+            value={inputData.cpassword}
+            onChange={getFormValue}
+            autoComplete="off"
+          />
+        </div>
+        <Button onClick={sendDataToDatabase} className="submit">
+          register Student
+        </Button>
       </form>
     </Section>
   );
@@ -169,7 +236,7 @@ const Section = styled.section`
       display: grid;
       justify-content: center;
       grid-template-columns: repeat(3, 1fr);
-      grid-gap: 2.5rem;
+      grid-gap: 2rem;
       div {
         label {
           line-height: 1em;
@@ -181,27 +248,61 @@ const Section = styled.section`
             }
           }
         }
-      }
-    }
-  }
-
-  .textFieldDiv {
-    padding: 3rem 0;
-    display: flex;
-    textarea {
-      width: 90%;
-      height: 20rem;
-      font-size: 1.6rem;
-      /* background-color: red; */
-      flex: 1;
-    }
-    div {
-      div {
-        input {
-          appearance: none;
-          background-color: red;
+        &:nth-child(6) {
+          div {
+            input {
+            }
+          }
         }
       }
+    }
+    .textFieldDiv {
+      padding: 2rem 0;
+      display: flex;
+      gap: 2.5rem;
+      textarea {
+        width: 90%;
+        font-size: 1.6rem;
+        padding: 1rem;
+        flex: 1;
+        border: 1px solid #cccccc;
+        border-radius: 0.4rem;
+      }
+      .inputFileWrapper {
+        border: 3px dashed #ccc;
+        border-radius: 0.4rem;
+        position: relative;
+        isolation: isolate;
+        flex-basis: 31%;
+        label {
+          color: ${primaryColor};
+          width: 100%;
+          height: 100%;
+          font-size: 1.6rem;
+          position: absolute;
+          text-align: center;
+          z-index: 2;
+          display: grid;
+          place-items: center;
+          font-family: ${Constant.Fonts.primaryFont};
+        }
+        div {
+          display: none;
+          position: absolute;
+        }
+      }
+    }
+    .passwordDiv {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+    .submit {
+      ${Constant.ButtonStyle}
+      font-size: 1.6rem;
+      color: #fff;
+      background-color: ${primaryColor};
+      margin-top: 2rem;
     }
   }
 `;
