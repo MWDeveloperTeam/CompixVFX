@@ -1,22 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Section } from "./PlacementStyle";
-import UseAxios from "../CustomHooks/UseAxios";
 import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
 import { Constant } from "../../constant";
 import ReusableHeader from "../Reusable/ReusableHeader";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Store } from "../../StateStore";
 
 const Placements = () => {
-  const placementsApi = UseAxios(
-    "https://compix-api.herokuapp.com/placement",
-    []
-  );
+  const { api } = useContext(Store);
   useEffect(() => {
-    AOS.init({duration: 2000});
+    AOS.init({ duration: 2000 });
   }, []);
   return (
-    <Section id="placements" data-aos='fade-up'>
+    <Section id="placements" data-aos="fade-up">
       <ReusableHeader
         hColor={Constant.Colors.seconderyColor}
         pColor={"#222"}
@@ -24,7 +21,7 @@ const Placements = () => {
         pText="We provide placements in start-ups as well as MNC's After every course we provide internship to get hands-on experience in the real world."
       />
       <div className="card_container">
-        {placementsApi?.map((elem) => (
+        {api[0]?.placements?.map((elem) => (
           <div className="card" key={elem._id}>
             <div className="img_container">
               <img src={elem.image} alt="company banner" />

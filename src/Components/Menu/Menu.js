@@ -1,47 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link as Links } from "react-scroll";
 import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Constant } from "../../constant/index";
 import SideMenu from "../SideMenu/SideMenu";
-import axios from "axios";
 import Login from "../Login/Login";
+import { Store } from "../../StateStore";
 
 const Menu = () => {
-  const [dialogToggle, setDialogToggle] = useState(false)
+  const { api } = useContext(Store);
+
+  const [dialogToggle, setDialogToggle] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [logo, setLogo] = useState();
-  const [menuText, setMenuText] = useState([]);
   const [classAdd, setClassAdd] = useState("home");
   const [windowWidth, setWindowWidth] = useState(0);
 
-  const dialogToggleFunc = () => setDialogToggle(!dialogToggle)
+  const dialogToggleFunc = () => setDialogToggle(!dialogToggle);
 
   useEffect(() => {
-    const getItems = async () => {
-      try {
-        const response = await axios.get(
-          "https://compix-api.herokuapp.com/home",
-          {}
-        );
-
-        if (response.status === 200) {
-          setLogo(response.data[0].logo);
-          setMenuText(response.data[0].menu);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     const sliderfunc = () => {
       setWindowWidth(window.innerWidth);
     };
 
     window.addEventListener("resize", sliderfunc);
-
-    getItems();
   }, []);
 
   const toggleHandler = () => {
@@ -63,41 +45,43 @@ const Menu = () => {
         />
       </div>
       <div className="logo_container">
-        <Link to='/'>
-          <img src={logo} alt="logo" />
+        <Link to="/">
+          <img src={api[0]?.logo} alt="logo" />
         </Link>
       </div>
       <div className="menu_container">
         <ul>
-          {!menuText
+          {!api[0]
             ? "loading"
-            : menuText.map((curItem, index) => (
-                <li name={curItem} key={index}>
+            : api[0]?.menu.map((curItem) => (
+                <li name={curItem.list} key={curItem._id}>
                   <Links
-                    to={curItem}
-                    href={`#${curItem}`}
+                    to={curItem.list}
+                    href={`#${curItem.list}`}
                     smooth={true}
                     duration={1300}
-                    name={curItem}
+                    name={curItem.list}
                     onClick={(e) => {
                       setClassAdd(e.target.name);
                     }}
-                    className={curItem === classAdd && "active"}
+                    className={curItem === classAdd ? "active" : null}
                   >
-                    {curItem}
+                    {curItem.list}
                   </Links>
                 </li>
               ))}
         </ul>
       </div>
       <div className="login_container">
-        <Link to="" onClick={dialogToggleFunc}>Login</Link>
+        <Link to="" onClick={dialogToggleFunc}>
+          Login
+        </Link>
         <Link to="">Verify Student</Link>
       </div>
       {windowWidth < 768 ? (
-        <SideMenu listItems={menuText} toggle={toggle} hideMenu={hideMenu} />
+        <SideMenu listItems={api} toggle={toggle} hideMenu={hideMenu} />
       ) : null}
-      <Login dialogToggle={dialogToggle} dialogToggleFunc={dialogToggleFunc}/>
+      <Login dialogToggle={dialogToggle} dialogToggleFunc={dialogToggleFunc} />
     </MenuSection>
   );
 };

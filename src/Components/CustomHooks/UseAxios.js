@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const UseAxios = (url, Api) => {
   const [response, setResponse] = useState(Api);
@@ -16,7 +16,7 @@ const UseAxios = (url, Api) => {
 
     getItems();
   }, [url]);
-  return response
+  return response;
 };
 
 export default UseAxios;

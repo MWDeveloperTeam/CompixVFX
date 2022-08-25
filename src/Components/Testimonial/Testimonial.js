@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
 import UseAxios from "../CustomHooks/UseAxios";
@@ -9,19 +9,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 import { Button } from "./TestimonialButtons";
-import backImg from '../../Media/p1.jpg'
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import backImg from "../../Media/p1.jpg";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Store } from "../../StateStore";
 
 const Testimonial = () => {
   const [sliderHandle, setSliderHandle] = useState(window.screen.width);
-  const TestimonialApi = UseAxios(
-    "https://compix-api.herokuapp.com/testmonial",
-    []
-  );
+  const { api } = useContext(Store);
 
   useEffect(() => {
-    AOS.init({duration: 1500});
+    AOS.init({ duration: 1500 });
     const sliderfunc = () => {
       setSliderHandle(window.innerWidth);
     };
@@ -50,7 +48,7 @@ const Testimonial = () => {
     ],
   };
   return (
-    <Section data-aos='fade-down'>
+    <Section data-aos="fade-down">
       <div className="header_main">
         <ReusableHeader
           hText="Testimonial"
@@ -64,7 +62,7 @@ const Testimonial = () => {
       </div>
       <div className="testimonial_container">
         <Slider className="testimonial_slider" {...SliderSetting}>
-          {TestimonialApi?.map((elem) => (
+          {api[0]?.testimonial.map((elem) => (
             <SliderCard
               key={elem._id}
               username={elem.username}

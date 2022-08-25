@@ -8,8 +8,8 @@ import emailjs from "emailjs-com";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import validator from "validator";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Contact = () => {
   const [pending, setPending] = useState(false);
@@ -37,11 +37,11 @@ const Contact = () => {
     const emailError = () => toast.error("Email Is not Valid...!");
     const subjectError = () => toast.error("Message Field Is Empty...!");
 
-    if(validator.isEmpty(fname)) return fNameError()
-    if(validator.isEmpty(lname)) return fLameError()
-    if(!validator.isEmail(email)) return emailError()
-    if(validator.isEmpty(subject)) return subjectError()
-    setPending(true)
+    if (validator.isEmpty(fname)) return fNameError();
+    if (validator.isEmpty(lname)) return fLameError();
+    if (!validator.isEmail(email)) return emailError();
+    if (validator.isEmpty(subject)) return subjectError();
+    setPending(true);
 
     emailjs
       .sendForm(
@@ -53,13 +53,13 @@ const Contact = () => {
       .then(
         (result) => {
           Successnotify();
-          setPending(false) 
+          setPending(false);
         },
         (error) => {
           Errornotify();
-          setPending(false) 
+          setPending(false);
         }
-      )
+      );
 
     setFormInputs({ fname: "", lname: "", email: "", subject: "" });
   };
@@ -68,15 +68,22 @@ const Contact = () => {
     AOS.init();
   }, []);
   return (
-    <Section id="contact" data-aos='fade-up'>
+    <Section id="contact" data-aos="fade-up">
       <ReusableHeader
         hText="Contact Us"
         pText="We are always available, feel free to contact us."
         hColor={Constant.Colors.seconderyColor}
         pColor="#222"
       />
-      <div style={{padding: '3rem 0'}}>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.184546926292!2d74.7920036152147!3d34.039136880609384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e18fb855d5e4d1%3A0x9e93cd29cbd41862!2sCompix%20-VFX%20%26%20Animation!5e0!3m2!1sen!2sin!4v1652765731969!5m2!1sen!2sin" style={{border: '0', width: '100%', height: '300px'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div style={{ padding: "3rem 0" }}>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3306.184546926292!2d74.7920036152147!3d34.039136880609384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e18fb855d5e4d1%3A0x9e93cd29cbd41862!2sCompix%20-VFX%20%26%20Animation!5e0!3m2!1sen!2sin!4v1652765731969!5m2!1sen!2sin"
+          style={{ border: "0", width: "100%", height: "300px" }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="map"
+        ></iframe>
       </div>
       <div className="contact_container">
         <div className="contact_info_container">
@@ -132,13 +139,11 @@ const Contact = () => {
             />
           </div>
           <div className="button_div">
-            <button>
-              {pending ? "sending" : 'send'}
-            </button>
+            <button>{pending ? "sending" : "send"}</button>
           </div>
         </form>
       </div>
-      <ToastContainer position="bottom-center" autoClose={1000}/>
+      <ToastContainer position="bottom-center" autoClose={1000} />
     </Section>
   );
 };

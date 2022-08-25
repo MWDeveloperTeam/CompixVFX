@@ -41,7 +41,7 @@ const SideMenu = () => {
     <SideBar translate={!sideBarState ? null : "translateX(-25rem)"}>
       <div className="logo">
         <Link to="/admin">
-          <img src="https://compix.in/images/logo.png" />
+          <img src="https://compix.in/images/logo.png" alt="admin" />
         </Link>
         <div className="side_bar_icon">
           <BsFillArrowRightSquareFill

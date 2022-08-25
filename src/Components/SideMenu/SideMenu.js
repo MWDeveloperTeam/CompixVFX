@@ -3,14 +3,21 @@ import { Link } from "react-scroll";
 import { Menu } from "./SideMenuStyle";
 import { BsFacebook, BsYoutube, BsTwitter, BsInstagram } from "react-icons/bs";
 
-const SideMenu = ({ listItems, toggle, hideMenu}) => { 
+const SideMenu = ({ listItems, toggle, hideMenu }) => {
   return (
     <Menu translate={!toggle ? "-100%" : "0%"}>
       <div className="main_container">
         <ul>
-          {listItems.map((elem, index) => (
-            <li key={index}>
-              <Link to={elem} smooth={true} duration={1300} onClick={hideMenu}>{elem}</Link>
+          {listItems[0]?.menu.map((elem) => (
+            <li key={elem._id}>
+              <Link
+                to={elem.list}
+                smooth={true}
+                duration={1300}
+                onClick={hideMenu}
+              >
+                {elem.list}
+              </Link>
             </li>
           ))}
         </ul>

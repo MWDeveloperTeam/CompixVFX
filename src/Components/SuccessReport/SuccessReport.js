@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
 import ReusableHeader from "../Reusable/ReusableHeader";
-import {FaChalkboardTeacher, FaUsers, FaBook, FaUniversity} from 'react-icons/fa'
+import {
+  FaChalkboardTeacher,
+  FaUsers,
+  FaBook,
+  FaUniversity,
+} from "react-icons/fa";
 import CountUp from "react-countup";
-import UseAxios from "../CustomHooks/UseAxios";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Store } from "../../StateStore";
 
 const SuccessReport = () => {
-  const SuccessApi = UseAxios("https://compix-api.herokuapp.com/success", []);
+  const { api } = useContext(Store);
 
   useEffect(() => {
     AOS.init();
@@ -22,12 +27,20 @@ const SuccessReport = () => {
         pText="Without continual growth and progress, such words as improvement, achievement and success have no meaning. "
         pColor="#222"
         hColor={Constant.Colors.seconderyColorLight}
-        data-aos='fade-down' data-aos-duration="2000"/>
+        data-aos="fade-down"
+        data-aos-duration="2000"
+      />
       <div className="counter_container">
-        {SuccessApi?.map((elem, i) => (
-          <div key={i} className={`success_card_container ${elem.title} `} data-aos='fade-up' data-aos-duration="2000">
+        {api[0]?.successReport?.map((elem) => (
+          <div
+            key={elem._id}
+            className={`success_card_container ${elem.title} `}
+            data-aos="fade-up"
+            data-aos-duration="2000"
+          >
             <div className="number">
-              <i className={elem.icon}></i><CountUp end={elem.num} duration={2} />
+              <i className={elem.icon}></i>
+              <CountUp end={elem.num} duration={2} />
             </div>
             <div className="title">{elem.title}</div>
           </div>
@@ -59,7 +72,7 @@ const Section = styled.section`
       font-size: 2.2rem;
       text-transform: capitalize;
       letter-spacing: 0.1rem;
-      border-left: .5rem solid ${Constant.Colors.seconderyColor};
+      border-left: 0.5rem solid ${Constant.Colors.seconderyColor};
 
       .number {
         background-color: ${Constant.Colors.primaryColor};
@@ -103,26 +116,23 @@ const Section = styled.section`
     }
   }
 
-  @media only screen and (max-width: 995px){
-
-  .counter_container {
-    grid-template-areas: "students students Trainer Trainer" "Programs Programs Placements Placements";
-
+  @media only screen and (max-width: 995px) {
+    .counter_container {
+      grid-template-areas: "students students Trainer Trainer" "Programs Programs Placements Placements";
     }
   }
 
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     padding: 2rem;
   }
 
-  @media only screen and (max-width: 500px){
-
-.counter_container {
-  grid-template-areas: "students students students students"
-
-   "Trainer Trainer Trainer Trainer"
-    "Programs Programs Programs Programs" 
-    "Placements Placements Placements Placements";
+  @media only screen and (max-width: 500px) {
+    .counter_container {
+      grid-template-areas:
+        "students students students students"
+        "Trainer Trainer Trainer Trainer"
+        "Programs Programs Programs Programs"
+        "Placements Placements Placements Placements";
+    }
   }
-}
 `;

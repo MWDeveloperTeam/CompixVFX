@@ -17,12 +17,8 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 // import UseAxios from "../../Components/CustomHooks/UseAxios";
 import { data as usersData } from "./exampledata.js";
 
-const {
-  primaryColor,
-  seconderyColor,
-  seconderyColorLight,
-  mainColor,
-} = Constant.AdminColors;
+const { primaryColor, seconderyColor, seconderyColorLight, mainColor } =
+  Constant.AdminColors;
 
 const ViewStudents = () => {
   const [DropdownText, setDropdownText] = useState("all");
@@ -99,14 +95,12 @@ const ViewStudents = () => {
       <TableContainer className="tableContainer">
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell>name</TableCell>
-              <TableCell>parentage</TableCell>
-              <TableCell>contact</TableCell>
-              <TableCell>course</TableCell>
-              <TableCell>action</TableCell>
-            </TableRow>
+            <TableCell>#</TableCell>
+            <TableCell>name</TableCell>
+            <TableCell>parentage</TableCell>
+            <TableCell>contact</TableCell>
+            <TableCell>course</TableCell>
+            <TableCell>action</TableCell>
           </TableHead>
           <TableBody>
             {usersData
@@ -130,7 +124,7 @@ const ViewStudents = () => {
           </TableBody>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[5, 10, 15,20, 25]}
+              rowsPerPageOptions={[5, 10, 15, 20, 25]}
               count={usersData.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -248,7 +242,6 @@ const Section = styled.section`
       }
       td {
         border: none;
-        
       }
       tr:last-child td div * {
         font-size: 1.4rem;

@@ -1,27 +1,27 @@
-import React, {useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { Section } from "./AboutStyle";
 import { IoArrowRedoCircle } from "react-icons/io5";
-import UseAxios from "../CustomHooks/UseAxios";
 import ReusableHeader from "../Reusable/ReusableHeader";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Store } from "../../StateStore";
 
 const About = () => {
-  const aboutApi = UseAxios("https://compix-api.herokuapp.com/about", []);
+  const { api } = useContext(Store);
 
   useEffect(() => {
     AOS.init({
       duration: 2000,
     });
   }, []);
-  
+
   return (
-    <Section id="about" data-aos='fade-up'>
+    <Section id="about" data-aos="fade-up">
       <ReusableHeader
         pText="COMPIX trains students in industry relevent, employment-oriented
           skills through most advanced tools and technologies with the help of
           expert faculty."
-          hText="Who we are"
+        hText="Who we are"
       />
       <div className="content_container">
         <div className="content">
@@ -37,8 +37,8 @@ const About = () => {
             make students ready for a successful future.
           </p>
           <ul>
-            {aboutApi?.map((item, i) => (
-              <li key={i}>
+            {api[0]?.about?.map((item) => (
+              <li key={item._id}>
                 <IoArrowRedoCircle /> {item.courseDuration}
               </li>
             ))}
@@ -46,7 +46,10 @@ const About = () => {
         </div>
         <div className="img_container">
           <figure>
-            <img src="https://compix.in/images/about.png" alt="Image" />
+            <img
+              src="https://compix.in/images/about.png"
+              alt="about_background"
+            />
           </figure>
         </div>
       </div>

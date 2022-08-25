@@ -10,21 +10,21 @@ import {
 } from "@mui/material";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
+import axios from "axios";
 
-const { primaryColor, seconderyColor, seconderyColorLight, mainColor } =
-  Constant.AdminColors;
+const { primaryColor, seconderyColor } = Constant.AdminColors;
 
-const useStyles = makeStyles({
-  selectBox: {
-    backgroundColor: "red",
-    fontSize: "1.4rem",
-  },
-});
+// const useStyles = makeStyles({
+//   selectBox: {
+//     backgroundColor: "red",
+//     fontSize: "1.4rem",
+//   },
+// });
 const RegisterStudent = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [profilePath, setProfilePath] = useState({});
-  const [inputData, setInputData] = useState({
+  const initialData = {
     fname: "",
     lname: "",
     mname: "",
@@ -38,7 +38,8 @@ const RegisterStudent = () => {
     email: "",
     password: "",
     cpassword: "",
-  });
+  };
+  const [inputData, setInputData] = useState(initialData);
 
   const getFormValue = (e) => {
     const { name, value } = e.target;
@@ -46,24 +47,17 @@ const RegisterStudent = () => {
       return { ...pre, [name]: value };
     });
   };
-  const sendDataToDatabase = (e) => {
+  const sendDataToDatabase = async (e) => {
     e.preventDefault();
-    console.log(inputData);
-    setInputData({
-      fname: "",
-      lname: "",
-      mname: "",
-      parentage: "",
-      phone: "",
-      dob: "",
-      course: "",
-      gender: "",
-      qualification: "",
-      address: "",
-      email: "",
-      password: "",
-      cpassword: "",
-    });
+    try {
+      const res = await axios.post("/students/signup", inputData);
+      alert(res.data.message);
+      if (res.status === 201) {
+        setInputData(initialData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Section>

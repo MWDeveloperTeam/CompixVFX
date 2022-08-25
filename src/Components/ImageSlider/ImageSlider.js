@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import UseAxios from "../CustomHooks/UseAxios";
+import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import { Constant } from "../../constant";
@@ -11,16 +10,17 @@ import { LeftButton } from "./Buttons";
 // import AOS from 'aos';
 // import 'aos/dist/aos.css'
 // AOS.init();
+import { Store } from "../../StateStore";
 
 const ImageSlider = () => {
-  const imagesApi = UseAxios("https://compix-api.herokuapp.com/home", []);
+  const { api } = useContext(Store);
   const sliderRef = useRef(null);
   return (
     <div className="image_slider_container" id="home">
       <Slider dots infinite autoplay autoplaySpeed={2000} ref={sliderRef}>
-        {imagesApi[0]?.imglinks?.map((img) => (
+        {api[0]?.imglinks?.map((img) => (
           <div className="img_container" key={img._id}>
-            <img src={img.text} alt="Slide Images" />
+            <img src={img.links} alt="Slide Images" />
           </div>
         ))}
       </Slider>
@@ -31,8 +31,8 @@ const ImageSlider = () => {
           </h1>
           <p>Kashmir's first premiere multimedia Institute</p>
           <ul>
-            {imagesApi[0]?.coursename?.map((course, i) => (
-              <li key={i}>{course}</li>
+            {api[0]?.coursename?.map((course) => (
+              <li key={course._id}>{course.list}</li>
             ))}
           </ul>
           <button>
@@ -122,7 +122,7 @@ const HeroText = styled.div`
       opacity: 1;
       color: #fff;
       cursor: pointer;
-      
+
       a {
         display: block;
         width: 100%;
@@ -132,11 +132,10 @@ const HeroText = styled.div`
         border-radius: 100rem;
         transition: ease-in-out 0.3s;
         &:hover {
-        background-color: #fff;
-        color: #000;
+          background-color: #fff;
+          color: #000;
+        }
       }
-      }
-      
     }
   }
 

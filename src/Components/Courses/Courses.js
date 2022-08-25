@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import UseAxios from "../CustomHooks/UseAxios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,14 +9,13 @@ import { Course } from "./Style";
 import ReusableHeader from "../Reusable/ReusableHeader";
 import { Constant } from "../../constant";
 import { Button } from "./CoursesButtons";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Store } from "../../StateStore";
 
 const Courses = () => {
   const [sliderHandle, setSliderHandle] = useState(window.screen.width);
-  const coursesApi = UseAxios("https://compix-api.herokuapp.com/courses", []);
-
- 
+  const { api } = useContext(Store);
 
   const coursesSliderRef = useRef(null);
 
@@ -55,14 +54,14 @@ const Courses = () => {
   };
 
   useEffect(() => {
-    AOS.init({duration: 2000});
+    AOS.init({ duration: 2000 });
     const sliderfunc = () => {
       setSliderHandle(window.innerWidth);
     };
     window.addEventListener("resize", sliderfunc);
   }, []);
   return (
-    <Course id="courses" data-aos='fade-up'>
+    <Course id="courses" data-aos="fade-up">
       <div className="content_container">
         <ReusableHeader
           hText="What's Best For You"
@@ -79,7 +78,7 @@ const Courses = () => {
       </div>
       <div className="card_container" style={{ paddingTop: "3rem" }}>
         <Slider {...SliderSetting}>
-          {coursesApi?.map(({ _id, title, label, icon }) => (
+          {api[0]?.courses?.map(({ _id, title, label, icon }) => (
             <div style={{ padding: "1rem", backgroundColor: "red" }} key={_id}>
               <Card title={title} label={label} icon={icon} />
             </div>
