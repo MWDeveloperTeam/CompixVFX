@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
-import UseAxios from "../CustomHooks/UseAxios";
 import Slider from "react-slick";
 import ReusableHeader from "../Reusable/ReusableHeader";
 import SliderCard from "./SliderCard";
@@ -67,7 +66,7 @@ const Testimonial = () => {
               key={elem._id}
               username={elem.username}
               qualification={elem.qualification}
-              Image={elem.Image}
+              Image={elem.image}
               comment={elem.comment}
               name={elem.username.slice(0, 5)}
             />

@@ -1,20 +1,30 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Constant } from "../../constant/index";
 import ReusableHeader from "../Reusable/ReusableHeader";
-import {
-  FaChalkboardTeacher,
-  FaUsers,
-  FaBook,
-  FaUniversity,
-} from "react-icons/fa";
+// import {
+//   FaChalkboardTeacher,
+//   FaUsers,
+//   FaBook,
+//   FaUniversity,
+// } from "react-icons/fa";
 import CountUp from "react-countup";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Store } from "../../StateStore";
+import UseObserver from "../CustomHooks/UseObserver";
 
 const SuccessReport = () => {
   const { api } = useContext(Store);
+  const targetRef = useRef(null);
+  const isVisible = UseObserver(
+    {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    },
+    targetRef
+  );
 
   useEffect(() => {
     AOS.init();
@@ -30,7 +40,7 @@ const SuccessReport = () => {
         data-aos="fade-down"
         data-aos-duration="2000"
       />
-      <div className="counter_container">
+      <div className="counter_container" ref={targetRef}>
         {api[0]?.successReport?.map((elem) => (
           <div
             key={elem._id}
@@ -40,7 +50,7 @@ const SuccessReport = () => {
           >
             <div className="number">
               <i className={elem.icon}></i>
-              <CountUp end={elem.num} duration={2} />
+              {isVisible && <CountUp end={elem.num} duration={2} />}
             </div>
             <div className="title">{elem.title}</div>
           </div>

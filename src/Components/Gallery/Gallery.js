@@ -21,16 +21,7 @@ const ImageGallery = () => {
         // thumbnailWidth: 312,
         thumbnailHeight: 212,
       };
-    }) ||
-    gallerydata.map((elem) => {
-      return {
-        src: elem.galleryimage,
-        thumbnail: elem.galleryimage,
-        thumbnailWidth: Math.floor(Math.random() * (300, 250) + 250),
-        // thumbnailWidth: 312,
-        thumbnailHeight: 212,
-      };
-    });
+    }) || gallerydata;
 
   return (
     <Section id="gallery">

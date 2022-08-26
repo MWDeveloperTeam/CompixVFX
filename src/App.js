@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { Suspense, useEffect, useReducer, useState } from "react";
+import React, { Suspense, useReducer } from "react";
 import UseAxios from "./Components/CustomHooks/UseAxios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
